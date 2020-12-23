@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+        "cmp-modal": "/components/modal/modal"
+    }
+}

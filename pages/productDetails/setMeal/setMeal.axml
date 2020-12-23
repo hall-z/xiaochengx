@@ -1,0 +1,89 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<import-sjs name="utils" from="/mixins/utils.sjs"/>
+<view class="set-meal-container" onTap="openTimeOut">
+  <view class="logo-container">
+    <image mode="widthFix" src="/image/logo.png"/>
+  </view>
+  <view class="product-content">
+    <view class="product-details-item" a:for="{{productList}}" a:for-item="product" a:for-index="pIndex">
+      <view class="title" a:if="{{info.productType == 3 && product.condimentItemList.length > 1}}">
+        「{{language == "zh_CN" ? product.roundNameCn : product.roundNameEn}} 
+        <text a:if="{{product.condimentItemList.length > 1}}">- {{product.condimentItemList.length}}{{langUtils.getSjsLanguage('portion', langs, language)}}{{product.quantity}}</text>
+        」
+      </view>
+      <block a:if="{{info.productType == 3 && product.quantity > 1 && product.condimentItemList.length > 1}}">
+        <view a:for="{{product.quantity}}" a:for-item="qitem" a:for-index="qIndex" key="{{qIndex}}">
+          <view class="content {{qIndex != product.quantity-1 ? '' : 'pt'}}">
+            <view class="goods-item" a:for="{{product.condimentItemList}}" 
+              a:for-item="good" a:for-index="gIndex" onTap="proItemChange" 
+                data-pindex="{{pIndex}}" 
+                data-gindex="{{gIndex}}"
+                data-tindex="{{qIndex}}"
+                data-item="{{product.condimentItemList}}">
+              <view class="goods-info {{utils.getTargetIndex(info, pIndex, qIndex) == gIndex ? 'active' : ''}}">
+                <view class="add-price" a:if="{{utils.getTargetIndex(info, pIndex, qIndex) == gIndex && good.addonPrice > 0}}">
+                  {{langUtils.getSjsLanguage('add', langs, language)}}￥ <text class="number">{{good.addonPrice/100}}</text>
+                </view>
+                <image class="ico-selected" mode="scaleToFill" a:if="{{utils.getTargetIndex(info, pIndex, qIndex) == gIndex}}" src="/image/ico-selected.png"/>
+                <!-- 0529 添加已售罄icon 开始 -->
+                <view class="img-box">
+                  <image class="goods-img" mode="scaleToFill" src="{{good.sokImageUrl}}"/>
+                  <view class="so-mask" a:if="{{good.disabledFlag == 0}}">
+                    <image src="{{slanguage == 'en_US' ? '/image/sold-out-en.png' : '/image/sold-out.png'}}"
+                      mode="scaleToFill" class="imgs-out" lazy-load="{{true}}"></image>
+                  </view>
+                </view>
+                <!-- 0529 添加已售罄icon 结束 -->
+              </view>
+              <view class="name {{utils.getTargetIndex(info, pIndex, qIndex) == gIndex ? 'active' : ''}}">
+                {{language == "zh_CN" ? good.name : good.nameEn}}
+                <block a:if="{{info.productType == 2 || (info.productType == 3 && product.condimentItemList.length == 1)}}"><text class="pl-10">-{{product.quantity}}</text>{{langUtils.getSjsLanguage('d_items', langs, language)}}</text></block>
+              </view>
+            </view>
+          </view>
+          <view class="line-container" a:if="{{qIndex != product.quantity-1}}">
+            <view class="line"></view>
+          </view>
+        </view>
+      </block>
+      <block a:else>
+        <view class="content {{product.condimentItemList.length > 1 ? '' : 'pt'}}">
+          <view class="goods-item" a:for="{{product.condimentItemList}}" 
+            a:for-item="good" a:for-index="gIndex" onTap="proItemChange" 
+              data-pindex="{{pIndex}}" 
+              data-gindex="{{gIndex}}"
+              data-item="{{product.condimentItemList[gIndex]}}">
+            <view class="goods-info {{good.isdefault == 'Y' ? 'active' : ''}}">
+              <view class="add-price" a:if="{{good.isdefault == 'Y' && good.addonPrice > 0}}">
+                {{langUtils.getSjsLanguage('add', langs, language)}}￥ <text class="number">{{good.addonPrice/100}}</text>
+              </view>
+              <image class="ico-selected" mode="scaleToFill" a:if="{{good.isdefault == 'Y'}}" src="/image/ico-selected.png"/>
+              <!-- <image class="goods-img" mode="scaleToFill" src="{{good.sokImageUrl}}"/> -->
+              <!-- 0529 添加已售罄icon 开始 -->
+              <view class="img-box">
+                  <image class="goods-img" mode="scaleToFill" src="{{good.sokImageUrl}}"/>
+                  <view class="so-mask" a:if="{{good.disabledFlag == 0}}">
+                    <image src="{{slanguage == 'en_US' ? '/image/sold-out-en.png' : '/image/sold-out.png'}}"
+                      mode="scaleToFill" class="imgs-out" lazy-load="{{true}}"></image>
+                  </view>
+                </view>
+                <!-- 0529 添加已售罄icon 结束 -->
+            </view>
+            <view class="name {{good.isdefault == 'Y' ? 'active' : ''}}">
+              {{language == "zh_CN" ? good.name : good.nameEn}}
+              <block a:if="{{info.productType == 2 || (info.productType == 3 && product.condimentItemList.length == 1)}}">
+                <text class="pl-10">-{{product.quantity}}</text>
+                {{langUtils.getSjsLanguage('d_items', langs, language)}}</text>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="line-container" a:if="{{gsIndex < product.condimentItemList.length - 1}}">
+          <view class="line"></view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <cmp-footer info="{{info}}" menuInto="{{menuInto}}" onReset="reset"  slanguage="{{language}}"/>
+  <cmp-modal ref="saveRef" isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" onAdd="onAdd" slanguage="{{language}}"></cmp-modal>
+</view>

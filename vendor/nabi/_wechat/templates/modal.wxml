@@ -1,0 +1,136 @@
+<template name="mbox_render_record">
+  <view style="font-size:0; padding:0 {{item.xpadding||0}}rpx; margin-bottom:{{item.ymargin||0}}rpx;">
+    <image binderror="onFlyerImageError" src="{{record.bg||item.bg||record}}" style="width:100%" mode="{{item.mode || 'widthFix'}}"></image>
+    <block wx:if="{{record.btn}}" wx:for="{{record.btn}}" wx:for-item="btn" wx:key="record_btn_key">
+      <view wx:if="{{btn.type == 7}}" class="cam_common_txt" style="width:{{btn.pos[2]}}rpx;height:{{btn.pos[3]}}rpx;left:{{btn.pos[0]}}rpx;top:{{btn.pos[1]}}rpx; z-index:{{btn.z_index||'auto'}};text-align:{{btn.action.align||'center'}};color:{{btn.action.color}}; font-size:{{btn.action.font_size||32}}rpx;font-weight:{{btn.action.font_weight||'normal'}};font-family:{{item.action.font_family||'inherit'}};">
+        {{btn.action.value}}
+      </view>
+      <block wx:elif="{{btn.type == 8}}">
+        <image wx:if="{{btn.src}}" binderror="onFlyerImageError" class="cam_common_img" style="width:{{btn.pos[2]}}rpx;height:{{btn.pos[3]}}rpx;left:{{btn.pos[0]}}rpx;top:{{btn.pos[1]}}rpx;border-radius:{{btn.radius||0}}; z-index:{{btn.z_index||'auto'}};" src="{{btn.src}}" mode="{{btn.mode||'widthFix'}}"></image>
+      </block>
+      <button wx:else
+        class="cam_common_btn" style="width:{{btn.pos[2]}}rpx;height:{{btn.pos[3]}}rpx;left:{{btn.pos[0]}}rpx;top:{{btn.pos[1]}}rpx; z-index:{{btn.z_index||'auto'}};" type="default" size="defaultSize" catchtap="onFlyerButtonTap"
+        data-btnid="{{btn.btnId||5001+idx}}" data-index="{{idx}}" data-action="{{btn.action}}" data-type="{{ btn.type }}" data-open="{{btn.openType||''}}" form-type="submit"></button>
+    </block>
+  </view>
+</template>
+
+
+
+<template name="mbox_render_items">
+  <block wx:for="{{btns}}" wx:key="btns_msg_key">
+
+    <view wx:if="{{item.type == 7}}" class="cam_common_txt" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};text-align:{{item.action.align||'center'}};color:{{item.action.color}}; font-size:{{item.action.font_size||32}}rpx;font-weight:{{item.action.font_weight||'normal'}};font-family:{{item.action.font_family||'inherit'}};">
+      {{!canIUse.countDown?item.action.value:((item.action.value=="{CD:S}"?canIUse.countDown.s:(item.action.value=="{CD:M}"?canIUse.countDown.m:(item.action.value=="{CD:H}"?canIUse.countDown.h:(item.action.value=="{CD:D}"?canIUse.countDown.d:item.action.value))))||"--")}}
+    </view>
+
+    <block wx:elif="{{item.type == 8}}">
+      <image wx:if="{{item.src}}" binderror="onFlyerImageError" class="cam_common_img" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx;border-radius:{{item.radius||0}}; z-index:{{item.z_index||'auto'}};" src="{{item.src}}" mode="{{item.mode||'widthFix'}}"></image>
+    </block>
+
+    <scroll-view wx:elif="{{item.type == 15}}" scroll-y class="cam_scroll_list" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};">
+      <block wx:for="{{item.records||item.images}}" wx:key="key_record_item" wx:for-item="record" wx:for-index="idx">
+        <template is="mbox_render_record" data="{{record:record, item:item, idx:index*100+idx}}"></template>
+      </block>
+    </scroll-view>
+
+    <swiper wx:elif="{{item.type == 18}}" class="cam_swiper_list" circular="true" indicator-dots="{{!item.hide_dots}}" indicator-active-color="{{item.active_color||'#000000'}}" autoplay="{{item.interval>0}}" interval="{{item.interval}}" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};">
+      <swiper-item wx:for="{{item.records||item.images}}" wx:key="key_record_item" wx:for-item="record" wx:for-index="idx">
+        <template is="mbox_render_record" data="{{record:record, item:item, idx:index*100+idx}}"></template>
+      </swiper-item>
+    </swiper>
+
+    <navigator wx:elif="{{item.type == 2 && item.action.appid && canIUse.navMiniapp}}" open-type="navigate" target="miniProgram" app-id="{{item.action.appid}}" path="{{item.action.path}}" extra-data="{{item.action.extra||''}}" version="{{item.action.env||'release'}}" bindfail="onFlyerNavTapError"
+      class="cam_common_btn" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};" data-btnid="{{item.btnId||4001+index}}"
+      data-index="{{index}}" data-action="{{item.action}}" data-type="{{ item.type }}" bindtap="onFlyerFormSubmit"></navigator>
+
+    <navigator wx:elif="{{item.type == 2 && !item.action.appid && canIUse.exitMiniapp}}" open-type="exit" target="miniProgram" app-id="{{item.action.appid}}" extra-data="{{item.action.extra||''}}" bindfail="onFlyerNavTapError"
+      class="cam_common_btn" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};" data-btnid="{{item.btnId||4001+index}}"
+      data-index="{{index}}" data-action="{{item.action}}" data-type="{{ item.type }}" bindtap="onFlyerFormSubmit"></navigator>
+
+    <button wx:elif="{{item.type == 10 && canIUse[item.openType]}}" open-type="{{item.openType}}" app-parameter="{{item.appParam||''}}" binderror="onFlyerButtonError" bindgetuserinfo="onFlyerGetUserInfo" bindgetphonenumber="onFlyerGetPhoneNumber"
+      class="cam_common_btn" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};" type="default" size="defaultSize" data-btnid="{{item.btnId||4001+index}}"
+      data-index="{{index}}" data-action="{{item.action}}" data-type="{{ item.type }}" form-type="submit"></button>
+
+    <button wx:else
+      class="cam_common_btn" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};" type="default" size="defaultSize" catchtap="onFlyerButtonTap"
+      data-btnid="{{item.btnId||4001+index}}" data-index="{{index}}" data-action="{{item.action}}" data-type="{{ item.type }}" data-open="{{item.openType||''}}" form-type="submit"></button>
+
+  </block>
+</template>
+
+
+
+<template name="mbox_render_cover">
+  <block wx:for="{{btns}}" wx:key="mbox_btns">
+
+    <cover-view wx:if="{{item.type == 7}}" class="cam_common_txt" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx; z-index:{{item.z_index||'auto'}};text-align:{{item.action.align||'center'}};color:{{item.action.color}}; font-size:{{item.action.font_size||32}}rpx;font-weight:{{item.action.font_weight||'normal'}};font-family:{{item.action.font_family||'inherit'}};">
+      {{!canIUse.countDown?item.action.value:((item.action.value=="{CD:S}"?canIUse.countDown.s:(item.action.value=="{CD:M}"?canIUse.countDown.m:(item.action.value=="{CD:H}"?canIUse.countDown.h:(item.action.value=="{CD:D}"?canIUse.countDown.d:item.action.value))))||"--")}}
+    </cover-view>
+
+    <block wx:elif="{{item.type == 8}}">
+      <cover-image wx:if="{{item.src}}" binderror="onFlyerImageError" class="cam_common_img" style="width:{{item.pos[2]}}rpx;height:{{item.pos[3]}}rpx;left:{{item.pos[0]}}rpx;top:{{item.pos[1]}}rpx;border-radius:{{item.radius||0}}; z-index:{{item.z_index||'auto'}};" src="{{item.src}}" mode="{{item.mode||'widthFix'}}"></cover-image>
+    </block>
+
+    <cover-view wx:else
+      class="cam_cover_btn" style="width:{{item.pos[2]}}rpx; height:{{item.pos[3]}}rpx; left:{{item.pos[0]}}rpx; top:{{item.pos[1]}}rpx; z-index:{{item.z_index||10}};" type="default" size="defaultSize" bindtap="onFlyerButtonTap"
+      data-btnid="{{item.btnId||4001+index}}" data-index="{{index}}" data-action="{{item.action}}" data-type="{{item.type}}"></cover-view>
+
+  </block>
+</template>
+
+
+
+<template name="flyer_modal">
+  <block wx:if="{{modal_msg.length>0}}" wx:for="{{modal_msg}}" wx:for-item="mbox" wx:key="modal_msg">
+    <view wx:if="{{!mbox.bg}}">【弹窗设置错误】：无背景图！</view>
+
+    <block wx:elif="{{!mbox.cover || !canIUse.coverView}}">
+      <form bindsubmit="onFlyerFormSubmit" report-submit="true">
+      <view wx:if="{{mbox.pos[0]==0 && mbox.pos[1]==0 && !mbox.right && !mbox.bottom}}" class="cam_modal_center {{mbox.close?'cam_hide':''}} {{mbox.mask?'cam_masked':''}}" style="z-index:{{mbox.z_index||1000}}">
+        <view style="display:inline-block; position:relative; width:{{mbox.pos[2]}}rpx; height:{{mbox.pos[3]}}rpx; background-image:url({{mbox.bg}}); background-size:cover;">
+          <template is="mbox_render_items" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+        </view>
+      </view>
+      <view wx:else class="{{mbox.mask?'cam_modal_plain cam_masked':'cam_modal_pixel'}} {{mbox.close?'cam_hide':''}}" style="z-index:{{mbox.z_index||1000}}">
+        <block wx:if="{{!mbox.right && !mbox.bottom}}">
+          <view style="position:fixed; left:{{mbox.pos[0]}}rpx; top:{{mbox.pos[1]}}rpx; width:{{mbox.pos[2]}}rpx; height: {{mbox.pos[3]}}rpx; background-image:url({{mbox.bg}}); background-size:cover">
+            <template is="mbox_render_items" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+          </view>
+        </block>
+        <block wx:elif="{{mbox.right && !mbox.bottom}}">
+          <view style="position:fixed; right:{{mbox.pos[0]}}rpx; top:{{mbox.pos[1]}}rpx; width:{{mbox.pos[2]}}rpx; height: {{mbox.pos[3]}}rpx; background-image:url({{mbox.bg}}); background-size:cover">
+            <template is="mbox_render_items" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+          </view>
+        </block>
+        <block wx:elif="{{!mbox.right && mbox.bottom}}">
+          <view style="position:fixed; left:{{mbox.pos[0]}}rpx; bottom:{{mbox.pos[1]}}rpx; width:{{mbox.pos[2]}}rpx; height: {{mbox.pos[3]}}rpx; background-image:url({{mbox.bg}}); background-size:cover">
+            <template is="mbox_render_items" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+          </view>
+        </block>
+        <block wx:else>
+          <view style="position:fixed; right:{{mbox.pos[0]}}rpx; bottom:{{mbox.pos[1]}}rpx; width:{{mbox.pos[2]}}rpx; height: {{mbox.pos[3]}}rpx; background-image:url({{mbox.bg}}); background-size:cover">
+            <template is="mbox_render_items" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+          </view>
+        </block>
+      </view>
+      </form>
+    </block>
+
+    <block wx:else>
+      <cover-view wx:if="{{mbox.pos[0]||mbox.pos[1]}}" class="{{mbox.mask?'cam_modal_plain cam_masked':'cam_modal_pixel'}} {{mbox.close?'cam_hide':''}}" style="z-index:{{mbox.z_index||1000}}">
+        <cover-view style="position:fixed; overflow:hidden; left:{{mbox.pos[0]}}rpx; top:{{mbox.pos[1]}}rpx; width:{{mbox.pos[2]}}rpx; height: {{mbox.pos[3]}}rpx;">
+          <cover-image binderror="onFlyerImageError" style="width:100%;" src="{{mbox.bg}}" mode="widthFix"></cover-image>
+          <template is="mbox_render_cover" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+        </cover-view>
+      </cover-view>
+      <cover-view wx:else class="cam_modal_center {{mbox.close?'cam_hide':''}} {{mbox.mask?'cam_masked':''}}" style="z-index:{{mbox.z_index||1000}}">
+        <cover-view style="display:inline-block; position:relative; overflow:hidden; width:{{mbox.pos[2]}}rpx; height:{{mbox.pos[3]}}rpx;">
+          <cover-image binderror="onFlyerImageError" style="width:100%;" src="{{mbox.bg}}" mode="widthFix"></cover-image>
+          <template is="mbox_render_cover" data="{{canIUse:canIUse, btns:mbox.btn}}"></template>
+        </cover-view>
+      </cover-view>
+    </block>
+
+  </block>
+</template>

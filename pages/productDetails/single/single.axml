@@ -1,0 +1,22 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="single-product-container" onTap="openTimeOut">
+  <view class="logo-container">
+    <image mode="widthFix" src="/image/logo.png"/>
+  </view>
+  <view class="product-container">
+    <image class="product-img" mode="widthFix" src="{{info.images.sokImageUrl}}"/>
+    <view class="title">{{language == "zh_CN" ? info.name : info.nameEn}}</view>
+    <view class="price {{userInfo.id && info.membershipPrice != info.salesPrice ? 'btmo' : ''}}">
+      {{langUtils.getSjsLanguage('a_copy', langs, language)}}￥
+      <text class="num"  a:if="{{userInfo.id && info.membershipPrice != info.salesPrice}}">{{info.membershipPrice/100}}</text>
+      <text class="num"  a:else>{{info.salesPrice/100}}</text>
+      <view class="member-p-tip" a:if="{{userInfo.id && info.membershipPrice != info.salesPrice}}">
+        {{langUtils.getSjsLanguage('member_price', langs, language)}}
+			</view> 
+    </view>
+      <text class="has-member" a:if="{{userInfo.id && info.membershipPrice != info.salesPrice}}">¥{{info.salesPrice/100}}</text>
+  </view>
+
+  <cmp-footer info="{{info}}" onReset="reset" slanguage="{{language}}"/>
+   <cmp-modal ref="saveRef" isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" onAdd="onAdd" slanguage="{{language}}"></cmp-modal>
+</view>

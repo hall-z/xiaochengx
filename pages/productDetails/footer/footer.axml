@@ -1,0 +1,34 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="cmp-footer-container">
+  <view class="top-container">
+    <cmp-counter onChange="couterChange" number="{{number}}" showType="{{2}}"
+				min="{{info.minQty}}"
+				max="{{info.maxQty}}"/>
+    <view class="total-container">
+      <view class="member-p-tip" a:if="{{info.productType != 1 && userInfo.id && info.membershipPrice != info.salesPrice}}">
+          {{langUtils.getSjsLanguage('member_price', langs, slanguage)}}
+				</view>
+      {{langUtils.getSjsLanguage('total', langs, slanguage)}}￥
+      <text class="number">{{userInfo.id ? mtotal/100 : total/100}}</text>
+    </view>
+  </view>
+
+  <!-- <view class="button" onTap="addCarts">
+    加入购物车
+    <image mode="scaleToFill" src="/image/ico-next.png"/>
+  </view> -->
+  <view class="footer-container">
+    <view class="left">
+      <!-- <view class="left-l {{language == 'en_US' ? 'normal': ''}}" onTap="goBack">
+        {{langUtils.getSjsLanguage('sok_back', langs, language)}}
+      </view> -->
+      <image mode="scaleToFill" src="/image/sok-back.png" class="left-l" onTap="goBack"/>
+    </view>
+    <view class="right">
+      <view class="button {{slanguage == 'en_US' ? 'normal': ''}}" onTap="addCarts">
+        {{langUtils.getSjsLanguage('add_shopping_cart', langs, slanguage)}}
+        <!-- <image mode="scaleToFill" src="/image/ico-next.png"/> -->
+      </view>
+    </view>
+  </view>
+</view>

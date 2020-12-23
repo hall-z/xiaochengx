@@ -1,0 +1,97 @@
+@import "../../styles/common.scss";
+.menu-cart{
+    &-foot{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 5;
+		background:rgba(255,255,255,1);
+		border:pxChangeRpx(2) solid rgba(239,239,239,1);
+		box-shadow:0px 0px pxChangeRpx(40) rgba(86,42,0,0.1);
+		border-radius: pxChangeRpx(32) pxChangeRpx(32) 0px 0px;
+		
+	}
+	
+	.cart-info{
+		padding: pxChangeRpx(40) 0 pxChangeRpx(38);
+		display: flex;
+		align-items: center;
+		height: pxChangeRpx(133);
+		.left{
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding-left: pxChangeRpx(46);
+			&-l{
+				position: relative;
+                display: flex;
+                align-items: center;
+			}
+			.tip-box{
+				width:pxChangeRpx(53);
+				height:pxChangeRpx(53);
+				border:pxChangeRpx(6) solid rgba(255,125,0,1);
+				background: #fff;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: pxChangeRpx(-18);
+				right: pxChangeRpx(-16);
+				font-size:pxChangeRpx(34);
+				font-weight:bold;
+				color:rgba(245,85,0,1);
+			}
+			&-p{
+				display: flex;
+				// margin-left: 86rpx;
+				padding-right: pxChangeRpx(52);
+				font-size: pxChangeRpx(36);
+				align-items: flex-end;
+				color: #000000;
+				font-weight: bold;
+				line-height: pxChangeRpx(50);
+				text{
+					font-size: pxChangeRpx(80);
+					line-height: pxChangeRpx(80);
+					color: #000000;
+					font-weight: bold;
+				}
+			}
+		}
+		.right{
+			width: pxChangeRpx(502);
+			display: flex;
+			flex-direction: column;
+			button{
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: pxChangeRpx(130);
+				border-radius:pxChangeRpx(100) 0px 0px pxChangeRpx(100);
+				background:rgba(255,125,0,1);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: none;
+				font-size: pxChangeRpx(70);
+				color: #fff;
+				font-weight: bold;
+				line-height: pxChangeRpx(130);
+			}
+		}
+	}
+	.cart-icon{
+		width: pxChangeRpx(132);
+		height: pxChangeRpx(132);
+	}
+	.right-icon{
+		width: pxChangeRpx(195);
+		height: pxChangeRpx(130);
+		margin-right: pxChangeRpx(23);
+		margin-top: pxChangeRpx(15);
+	}
+}

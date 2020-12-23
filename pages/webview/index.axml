@@ -1,0 +1,6 @@
+<!-- 首页 -->
+<view class="container" onTap="openTimeOut">
+  <block a-if="{{url}}">
+			<web-view src="{{url}}"></web-view>
+  </block>
+</view>

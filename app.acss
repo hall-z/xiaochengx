@@ -1,0 +1,29 @@
+page{
+	display: flex;
+	min-height: 100%;
+	color: #222;
+	background: #F9F8F7;
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar{
+	width: 0;
+	height: 0;
+	color: transparent;
+}
+.container{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+  min-height: calc(100vh);
+}
+.bottom-view{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 26.29rpx;
+}
+.bottom-view .left{
+	width: 106.95rpx;
+	height: 90.28rpx;
+}

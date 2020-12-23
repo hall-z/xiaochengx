@@ -1,0 +1,58 @@
+<import-sjs name="utils" from="/mixins/utils.sjs"/>
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<block a:if="{{type == 0}}">
+  <view class="pro-cou-list" onTouchStart="onOpenTimeOut">
+    <image mode="scaleToFill" src="/image/product-coupon-bg.png" class="bg" />
+    <view class="info">
+        <image src="{{utils.getImg(item)}}" mode="scaleToFill" class="p-img"></image>
+        <view class="info-b">
+        
+          <text class="t1">{{slanguage == 'zh_CN' ? item.couponTypeInfo.couponName : item.couponTypeInfo.couponNameEn}}</text>
+          <view class="t2" a:if="{{item.couponTypeInfo.validityWay == 1}}">{{item.couponTypeInfo.validityStartDate}}{{langUtils.getSjsLanguage('to', langs, slanguage)}}{{item.couponTypeInfo.validityEndDate}}</view>
+          <view class="t2" a:elif="{{item.couponTypeInfo.validityWay == 2}}">
+            {{langUtils.getSjsLanguage('get_coupon', langs, slanguage)}}{{item.couponTypeInfo.validityDays}}{{langUtils.getSjsLanguage('validity_days', langs, slanguage)}}
+          </view>
+          <!-- <text class="t2">123</text> -->
+          <text class="t2">{{langUtils.getSjsLanguage('avalibable_times', langs, slanguage)}} {{utils.getHourM(item.couponTypeInfo.validityStartTime)}}{{langUtils.getSjsLanguage('to', langs, slanguage)}}{{utils.getHourM(item.couponTypeInfo.validityEndTime)}}</text>
+        </view>
+        <block a:if="{{slanguage == 'zh_CN'}}">
+          <view class="coupon-btn" onTap="clickCopponBtn" data-item="{{item}}">
+            <text class="letter">{{couponBtn}}</text>
+          </view>
+        </block>
+        <block a:else>
+          <view class="coupon-btn" onTap="clickCopponBtn" data-item="{{item}}">
+            <text class="letter letter1 rotate-burden-90" >{{couponBtn}}</text>
+          </view>
+        </block>
+      </view>
+  </view>
+</block>
+<block a:elif="{{type == 1}}">
+  <view class="n-pro-cou-list">
+    <view class="menu-list">
+    <view class="menu-list1">
+      <image mode="scaleToFill" src="/image/new-coupon-bg.png" class="bg" />
+      <image mode="scaleToFill" src="/image/coupon-tag.png" class="tag" />
+      <view class="info">
+        <image src="{{utils.getImg(item)}}" mode="scaleToFill" class="p-img"></image>
+        <text class="t1">{{slanguage == 'zh_CN' ? item.couponTypeInfo.couponName : item.couponTypeInfo.couponNameEn}}</text>
+        <view class="info-b">
+          <view class="t2" a:if="{{item.couponTypeInfo.validityWay == 1}}">{{item.couponTypeInfo.validityStartDate}} {{langUtils.getSjsLanguage('to', langs, slanguage)}} {{item.couponTypeInfo.validityEndDate}}</view>
+          <view class="t2" a:elif="{{item.couponTypeInfo.validityWay == 2}}">
+            {{langUtils.getSjsLanguage('get_coupon', langs, slanguage)}}{{item.couponTypeInfo.validityDays}}{{langUtils.getSjsLanguage('validity_days', langs, slanguage)}}
+          </view>
+          <text class="t2">{{langUtils.getSjsLanguage('avalibable_times', langs, slanguage)}} {{utils.getHourM(item.couponTypeInfo.validityStartTime)}} {{langUtils.getSjsLanguage('to', langs, slanguage)}} {{utils.getHourM(item.couponTypeInfo.validityEndTime)}}</text>
+        </view>
+        
+      </view>
+      <view class="coupon-btn" catchTap="clickCopponBtn" data-item="{{item}}">
+        <text class="letter letter1 rotate-burden-90" >{{item.is_add === 1 ? langUtils.getSjsLanguage('that_ok', langs, slanguage) : couponBtn}}</text>
+      </view>
+    </view>
+    </view>
+     <view class="good_box" hidden="{{hide_good_box}}"  style="left: {{bus_x}}px; top: {{bus_y}}px;">
+      <image mode="scaleToFill" src="/image/fly-icon.png" />
+    </view>
+  </view>
+</block>

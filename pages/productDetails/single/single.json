@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "cmp-footer": "../footer/footer",
+        "cmp-modal": "/components/modal/modal"
+    }
+}

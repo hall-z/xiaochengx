@@ -1,0 +1,5 @@
+<template name="flyer_preload">
+  <block wx:if="{{list.length>0}}" wx:for="{{list}}" wx:for-item="url" wx:key="preload_list">
+    <image style="width:0; height:0; opacity:0;" data-src="{{url}}" src="{{url}}" bindload="onFlyerPreloadOkay" binderror="onFlyerPreloadFail"></image>
+  </block>
+</template>

@@ -1,0 +1,28 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+
+<view class="modal-container" a:if="{{isShowMobileLoginModal}}">
+  <view class="modal-content">
+    <image class="modal-top" mode="widthFix" src="/image/{{language == 'en_US' ? 'sok-modal-phone-login-en' : 'sok-modal-phone-login'}}.png"/>
+    <view class="row-block mobile_container">
+      <input placeholder="{{langUtils.getSjsLanguage('sok_input_mobile_number', langs, language)}}" onInput="inputChange"
+        type="number" value="{{form.mobile}}" name="mobile" data-name="mobile" placeholder-class="input-placeholder" /> 
+      
+    </view>
+    <!-- <view class="error-msg"></view> -->
+    <view class="row-block code-container">
+      <input placeholder="{{langUtils.getSjsLanguage('sok_input_code', langs, language)}}" type="number" onInput="inputChange" value="{{form.code}}" name="code" data-name="code" placeholder-class="input-placeholder"/> 
+      <view class="send-code-btn" onTap="getCode">{{txt ? txt : langUtils.getSjsLanguage('sok_send_code', langs, language)}}</view>
+    </view>
+    <view class="privacy-c">
+      <image mode="scaleToFill" src="{{privacyStatus ? '/image/ico-selected.png' : '/image/icon-no-select.png'}}" onTap="changeStatus"/>
+      <view class="privacy-c-v">
+        {{langUtils.getSjsLanguage('im_agree_read', langs, language)}}
+        <text onTap="goPrivacy">《{{langUtils.getSjsLanguage('popeyes_privacy_info', langs, language)}}》</text>
+      </view>
+    </view>
+    <!-- <view class="error-msg"></view> -->
+
+    <button class="confirm-btn {{!privacyStatus ? 'disabled' : ''}}" disabled="{{!privacyStatus}}" onTap="goCheck">{{langUtils.getSjsLanguage('sok_confirm', langs, language)}}</button>
+    <image class="close-icon1" mode="scaleToFill"  src="/image/sok-close.png" onTap="closeModal"/>
+  </view>
+</view>

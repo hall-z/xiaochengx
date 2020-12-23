@@ -1,0 +1,15 @@
+/* px转rem方法 */
+@function pxChangeRpx($number){
+    @return $number * 750 / 1080 + rpx;
+}
+
+$themeColor: #FF7D00;
+$themeBlue: #03B2AA;
+$textColor: #951971;
+$disabled: #D8D8D8;
+
+@mixin ell {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

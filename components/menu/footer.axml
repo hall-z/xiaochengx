@@ -1,0 +1,27 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="menu-cart" >
+	<view class="menu-cart-foot">
+		<view class="cart-info">
+			<view class="left">
+				<view class="left-l" onTap="goCart">
+					<image src="/image/ico-cart.png" mode="scaleToFill" class="cart-icon"></image>
+					<view class="tip-box">
+						{{info.number}}
+					</view>
+				</view>
+				<view class="left-p">
+					{{langUtils.getSjsLanguage('total', langs, slanguage)}} ¥<text>{{userInfo.id ? info.mtotal : info.total}}</text>
+				</view>
+			</view>
+			<view class="right">
+				<button type="primary" onTap="goBalance">
+					<image src="/image/total-ji.png" mode="scaleToFill" class="right-icon"></image>
+					{{langUtils.getSjsLanguage('ready', langs, slanguage)}}
+				</button>
+			</view>
+		</view>
+	</view>
+
+	<!-- 状态modal框 -->
+  <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" isShowBtn="{{true}}" slanguage="{{language}}" onCloseModal="onCloseModal"/>
+</view>

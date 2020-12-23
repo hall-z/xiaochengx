@@ -1,0 +1,27 @@
+<import-sjs name="utils" from="../../mixins/utils.sjs"/>
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="container pro-cou-container" onTap="openTimeOut">
+  <view class="content">
+    <block a:for="{{list}}" key="{{index}}">
+      <cmp-item item="{{item}}" onResetCart="resetCart" onSelect="onSelect" onOpenTimeOut="openTimeOut" slanguage="{{language}}"></cmp-item>
+    </block>
+  </view>
+  <view class="btn-view">
+    <view class="left" onTap="goBack">
+        <image mode="scaleToFill" src="/image/back-icon-white.png" class="l-icon"/>
+        <text>{{langUtils.getSjsLanguage('continue_to_choose', langs, language)}}</text>
+    </view>
+    <view class="right" a:if="{{cartInfo.number > 0}}">
+        <view class="total">
+          {{langUtils.getSjsLanguage('total', langs, language)}} ¥<text>{{userInfo.id ? cartInfo.mtotal : cartInfo.total}}</text>
+        </view>
+        <view class="right-l" onTap="goCart">
+					<image src="/image/ico-cart.png" mode="scaleToFill" class="cart-icon"></image>
+					<view class="tip-box">
+						{{cartInfo.number}}
+					</view>
+				</view>
+    </view>
+  </view>
+  <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" onAdd="onAdd" slanguage="{{language}}"></cmp-modal>
+</view>

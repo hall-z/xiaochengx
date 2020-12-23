@@ -1,0 +1,126 @@
+@import "../../../styles/common.scss";
+.set-meal-container {
+    width: 100%;
+    padding-bottom: pxChangeRpx(427);
+    .logo-container {
+        text-align: center;
+        margin: pxChangeRpx(76) 0 pxChangeRpx(52);
+        image {
+            width: pxChangeRpx(314);
+        }
+    }
+    .img-box{
+        position: relative;
+    }
+    .so-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.6);
+    }
+    .imgs-out{
+        width: pxChangeRpx(200);
+        height: pxChangeRpx(200);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .product-content {
+        background-color: #fff;
+        .product-details-item {
+            border-bottom: pxChangeRpx(30) solid #F9F8F7;
+            .title {
+                font-weight: bold;
+                font-size: pxChangeRpx(36);
+                padding: pxChangeRpx(53) pxChangeRpx(23) pxChangeRpx(20);
+            }
+            .line-container {
+                padding-left: pxChangeRpx(50);
+                .line {
+                    border-bottom: 1px dashed #D8D8D8;
+                    margin-bottom: pxChangeRpx(75);
+                }
+            }
+            .content {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 pxChangeRpx(23);
+                &.pt{
+                    padding-top: pxChangeRpx(40)
+                }
+                .goods-item {
+                    width: 25%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    .goods-info {
+                        position: relative;
+                        width: pxChangeRpx(200);
+                        height: pxChangeRpx(200);
+                        border: pxChangeRpx(6) solid rgba(0,0,0,0);
+                        margin: 0 auto;
+                        border-radius: pxChangeRpx(30);
+                        &.active {
+                            border-color: $themeColor;
+                        }
+                        .goods-img {
+                            width: pxChangeRpx(200);
+                            height: pxChangeRpx(200);
+                            border-radius: pxChangeRpx(22);
+                        }
+                        .add-price {
+                            position: absolute;
+                            right: 0;
+                            top: - pxChangeRpx(20);
+                            transform: translateX(50%);
+                            height: pxChangeRpx(40);
+                            line-height: pxChangeRpx(40);
+                            background-color: $themeColor;
+                            color: #fff;
+                            font-weight: bold;
+                            font-size: pxChangeRpx(20);
+                            border-radius: pxChangeRpx(20);
+                            padding: 0 pxChangeRpx(10);
+                            z-index: 9;
+                            .number {
+                                font-size: pxChangeRpx(30);
+                
+                            }
+                        }
+                        .ico-selected {
+                            position: absolute;
+                            right:  - pxChangeRpx(36);
+                            bottom: - pxChangeRpx(36);
+                            width: pxChangeRpx(56);
+                            height: pxChangeRpx(56);
+                            z-index: 1;
+                        }
+                    }
+                    .name {
+                        width: pxChangeRpx(200);
+                        /* height: pxChangeRpx(84); */
+                        font-weight: bold;
+                        /* color: $themeColor; */
+                        padding: pxChangeRpx(55) pxChangeRpx(28) pxChangeRpx(30);
+                        text-align: center;
+                        font-size: pxChangeRpx(30);
+                        line-height: pxChangeRpx(42);
+                        min-height: pxChangeRpx(84);
+                        color: #43090F;
+                        &.active{
+                            color: $themeColor;
+                        }
+                        /* display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden; */
+                    }
+                }
+            }
+        }
+    }
+}

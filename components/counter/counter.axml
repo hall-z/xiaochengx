@@ -1,0 +1,17 @@
+<view class="neo-cp-counter" >
+  <view class="count-container">
+    <block a:if="{{showType == 1}}">
+      <block a:if="{{value != 0}}">
+        <image class="cum-icon" src="/image/reduce.png" onTap="reduce" mode="scaleToFill"></image>
+        <text class="mum">{{value}}</text>
+      </block>
+      <image class="cum-icon" src="{{value < max ? '/image/add.png' : '/image/add-disabled.png'}}" onTap="add" mode="scaleToFill" ></image>
+    </block>
+    <block a:if="{{showType == 2}}">
+      <image class="cum-icon cum-icon1" src="{{value <= min ? '/image/reduce-disabled.png' : '/image/reduce.png'}}" 
+        onTap="reduce" mode="scaleToFill"></image>
+      <text class="mum mum1">{{value}}</text>
+      <image class="cum-icon cum-icon1" src="{{value < max ? '/image/add.png' : '/image/add-disabled.png'}}" onTap="add" mode="scaleToFill" ></image>
+    </block>
+  </view>
+</view>

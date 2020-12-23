@@ -1,0 +1,12 @@
+<view class="container privacy-container"  onTap="openTimeOut">
+  <view class="top">
+    <image mode="scaleToFill" src="/image/logo-white1.png"/>
+  </view>
+  <view class="content">
+    <image mode="widthFix" src="http://dt.cdn.plkchina.cn/policy/privacy/{{language == 'en_US' ? 'mpEn' : 'mp'}}.png"/>
+  </view>
+  <view class="bottom-view">
+    <image mode="scaleToFill" src="/image/sok-back.png" class="left" onTap="goBack"/>
+    <view></view>
+  </view>
+</view>

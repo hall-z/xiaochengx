@@ -1,0 +1,59 @@
+<!-- 首页 -->
+<import-sjs name="langUtils" from="../../mixins/lang.sjs"/>
+<view class="index-container container" >
+  <view class="change-lan" onTap="changeLan">
+    <view class="lan-txt">
+      <!-- {{language == 'zh_CN' ? 'EN' : '中'}} -->
+      <image mode="scaleToFill" src="{{language == 'zh_CN' ? '/image/en.png' : '/image/cn.png'}}"/>
+    </view>
+  </view>
+  <view class="main-content">
+  
+    <!-- <image class="logo" mode="widthFix" src="/image/logo-white.png"/> -->
+    <image class="bg-img" mode="widthFix" src="/image/index-bg.png"/>
+    <!-- <view class="swiper-container">
+      <swiper class="swiper" 
+        autoplay="{{config.autoplay}}" 
+        interval="{{config.interval}}" 
+        duration="{{config.duration}}"
+        current="{{config.current}}"
+        circular="{{config.circular}}"
+        onChange="changeSwiper"
+        >
+        <block a:for={{bannerList}}>
+          <swiper-item class="swiper-item">
+            <image class="banner-image" mode="scaleToFill" src="{{item.imageUrl}}"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dot">
+        <block a:for="{{bannerList}}" key="{{index}}">
+          <view class="dot-list {{config.current == index ? ' active' : ''}}" ></view>
+        </block>
+      </view>
+    </view> -->
+    <view class="btn-c">
+      <view class="btn scan-login {{language == 'en_US' ? 'en-size' : ''}}" onTap="scanLogin">
+        <block a:if="{{showSign}}">
+          {{langUtils.getSjsLanguage('sok_login_scan_code', langs, language)}}
+          <text>{{langUtils.getSjsLanguage('sok_login_scan_code_tip', langs, language)}}</text>
+        </block>
+        <block a:else>
+            {{langUtils.getSjsLanguage('sok_login_qr_code', langs, language)}}
+        </block>
+    </view>
+    <view class="btn mobile-login {{language == 'en_US' ? 'en-size' : ''}}" onTap="mobileLogin">{{langUtils.getSjsLanguage('sok_phone_login', langs, language)}}</view>
+    </view>
+    
+
+    <!-- 状态modal框 -->
+    <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" />
+
+    <!-- 手机扫码登录框 -->
+    <mobile-login-modal isShowMobileLoginModal="{{isShowMobileLoginModal}}" onCloseModal="onCloseModal"/>
+  </view>
+  <view class="poster-contetn" a:if="{{showPoster}}" onTap="hidePoster">
+    <image mode="widthFix" src="/image/sok-poster.png" class="sok-poster"/>
+  </view>
+  
+</view>

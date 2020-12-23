@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+      "cmp-counter": "/components/counter/counter"
+  }
+}

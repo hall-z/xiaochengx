@@ -1,0 +1,74 @@
+@import "../../../styles/common.scss";
+.cmp-footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: pxChangeRpx(427);
+    background-color: #fff;
+    border-top: 1px solid #F3F2F1;
+    z-index: 9;
+    .top-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: pxChangeRpx(207);
+        padding: 0 pxChangeRpx(50);
+        font-weight: bold;
+        border-bottom: 1px solid #F3F2F1;
+        .total-container {
+            font-size: pxChangeRpx(36);
+            .number {
+                font-size: pxChangeRpx(100);
+            }
+        }
+    }
+    .footer-container{
+        margin-top: pxChangeRpx(50);
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        .left-l{
+            width: pxChangeRpx(154);
+            height: pxChangeRpx(130);
+        }
+    }
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: pxChangeRpx(795);
+        height: pxChangeRpx(130);
+        background-color: $themeColor;
+        border-radius: pxChangeRpx(100) 0 0 pxChangeRpx(100);
+        
+        font-size: pxChangeRpx(70);
+        /* letter-spacing: pxChangeRpx(18); */
+        color: #fff;
+        font-weight: bold;
+         &.normal{
+            letter-spacing: 0;
+        }
+        image {
+            width: pxChangeRpx(50);
+            height: pxChangeRpx(50);
+            margin-left: pxChangeRpx(10);
+        }
+    }
+    .member-p-tip{
+		/* background:rgba(255,255,255,0.1); */
+		border:pxChangeRpx(2) solid #FF7400;
+		border-radius:pxChangeRpx(4);
+		padding: 0 pxChangeRpx(6);
+		margin-right: pxChangeRpx(10);
+		line-height: pxChangeRpx(34);
+		font-size: pxChangeRpx(24);
+		/* @include ChickenSans-Bold; */
+		font-weight:bold;
+		color:rgba(255,125,0,1);
+		display: inline;
+		&.r5{
+			margin-right:5rpx;
+		}
+	}
+}

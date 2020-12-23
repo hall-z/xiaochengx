@@ -1,0 +1,28 @@
+ <import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+ <view class="product-item" onTouchStart="props.onOpenTimeOut">
+  <view class="title {{info.discountMyType == 2 ? 'add-title' : ''}}">
+    <view class="title-v" a:if="{{info.discountMyType == 1}}">{{langUtils.getSjsLanguage('coupon_tip', langs, slanguage)}}</view>
+    <view class="title-v" a:elif="{{info.discountMyType == 2}}">{{langUtils.getSjsLanguage('add', langs, slanguage)}}</view>
+    <text>{{slanguage == 'zh_CN' ? info.name : info.nameEn}}</text>
+    <text class="modify-text" a:if="{{info.productType == 3}}" onTap="goDetails" data-item="{{info}}">
+      {{langUtils.getSjsLanguage('sok_edit', langs, slanguage)}}
+    </text>
+  </view>
+  <view class="desc" >{{info.productType != 1 ? info.desSub : ''}}</view>
+  <view class="bottom {{info.productType != 1 ? 'mt-60' : 'mt-40'}}">
+    <!-- <view class="price">
+      <block a:if="{{language == 'en_US'}}">¥</block>{{info.salesPrice/100}}<block a:if="{{language == 'zh_CN'}}">元
+    </view> -->
+    <text class="price" a:if="{{info.discountMyType != 1 && info.discountMyType != 2}}">
+        ￥ <text a:if="{{userInfo.id}}">{{info.membershipPrice/100}}</text>
+        <text a:else>{{info.salesPrice/100}}</text>
+      </text>
+      <text class="price {{info.discountMyType == 2 ? 'add-price' : ''}}" a:else>
+        ￥ <text >{{info.discountMyType == 1 ? info.discountMyPrice : info.activityPrice}}</text>
+      </text>
+    <view>
+      <cmp-counter number="{{number}}" onChange="couterChange" showType="{{1}}" min="{{0}}" max="{{info.discountMyType == 1 || info.discountMyType == 2 ? 1 : info.maxQty}}"
+        ref="tid_{{info.id}}" info="{{info}}" />
+    </view>
+  </view>
+</view>

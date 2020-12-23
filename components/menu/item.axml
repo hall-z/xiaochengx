@@ -1,0 +1,49 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="menu-item"  onTap="goInfo">
+  <view class="menu-list component-observer">
+    <block a:if="{{observer_status}}">
+      <view class="menu-list1 ">
+        <view class="pro-img bg-gray"></view>
+        <text class="t1 bg-gray no1"></text>
+      </view>
+    </block>
+    <block a:else>
+      <view class="menu-list1 ">
+      <!-- 0529 添加已售罄限制 开始 -->
+      <view class="so-mask" a:if="{{info.disabledFlag == 0}}">
+        <image mode="scaleToFill" src="{{slanguage == 'en_US' ? '/image/sold-out-en.png' : '/image/sold-out.png'}}" class="pro-img-m"  lazy-load="{{true}}"/>
+      </view>
+      <!-- 0529 添加已售罄限制 结束 -->
+      <view class="member-price-tip" a:if="{{userInfo.id && info.membershipPrice != info.salesPrice}}">
+        {{langUtils.getSjsLanguage('member_price', langs, slanguage)}}
+        <image mode="scaleToFill" src="/image/member-dot.png" lazy-load="{{true}}"/>
+      </view>
+        <image mode="scaleToFill" src="{{info.images.sokImageUrl}}" class="pro-img"  lazy-load="{{true}}"/>
+      <text class="t1">{{slanguage == 'zh_CN' ? info.name : info.nameEn}}</text> 
+      <view class="b-info">
+        <view class="b-info-l">
+          ¥
+          <block a:if="{{userInfo.id && info.membershipPrice != info.salesPrice}}"><text class="p">{{info.membershipPrice ? info.membershipPrice/100 : ''}}</text></block>
+          <block a:else><text class="p">{{info.salesPrice ? info.salesPrice/100 : ''}}</text></block>
+          <!-- {{info.productType == 3 ? '起' : ''}} -->
+          <text class="o" a:if="{{userInfo.id && info.membershipPrice != info.salesPrice}}">¥{{info.salesPrice ? info.salesPrice/100 : ''}}</text>
+          <text a:if="{{info.productType == 3}}" class="oup ml-5" style="margin-left:5rpx"> {{langUtils.getSjsLanguage('up', langs, language)}}</text>
+        </view>
+        <view class="b-info-r" a:if="{{info.disabledFlag == 1}}">
+          <block a:if="{{info.productType == 3}}">
+            <view class="dizhi">
+              {{langUtils.getSjsLanguage('customization', langs, slanguage)}}<image mode="scaleToFill" src="/image/right-icon-white.png" />
+            </view>
+          </block>
+          <block a:else>
+            <image mode="scaleToFill" src="/image/icon-add-bg.png" class="add-icon"  lazy-load="{{true}}" catchTap="touchOnGoods"/>
+          </block>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+   <view class="good_box" hidden="{{hide_good_box}}"  style="left: {{bus_x}}px; top: {{bus_y}}px;">
+    <image mode="scaleToFill" src="/image/fly-icon.png" />
+   </view>
+</view>

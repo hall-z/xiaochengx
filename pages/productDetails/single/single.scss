@@ -1,0 +1,61 @@
+@import "../../../styles/common.scss";
+.single-product-container {
+    width: 100%;
+    padding-bottom: pxChangeRpx(427);
+    background-color: #F9F8F7;
+    .logo-container {
+        text-align: center;
+        margin: pxChangeRpx(76) 0 pxChangeRpx(52);
+        image {
+            width: pxChangeRpx(314);
+        }
+    }
+    .product-container {
+        text-align: center;
+        .product-img {
+            width: pxChangeRpx(950);
+            height: pxChangeRpx(950);
+            border-radius: pxChangeRpx(32);
+            background-color: #fff;
+        }
+        .title {
+            color: #43090F;
+            font-size: pxChangeRpx(44);
+            font-weight: bold;
+            margin-top: pxChangeRpx(50);
+        }
+        .price {
+            font-weight: bold;
+            font-size: pxChangeRpx(36);
+            margin: pxChangeRpx(18) 0 pxChangeRpx(50);
+            .num {
+                font-size: pxChangeRpx(80);
+            }
+            &.btmo{
+                margin-bottom: 0;
+            }
+        }
+        .has-member{
+            font-size:pxChangeRpx(36);
+            font-weight:400;
+            line-height:pxChangeRpx(40);
+            color:rgba(166,166,166,1);
+            // margin-left: 10rpx;
+            margin-top: pxChangeRpx(25);
+            text-decoration:line-through;
+            text-align: center;
+        }
+        .member-p-tip{
+            border:pxChangeRpx(2) solid #FF7400;
+            border-radius:pxChangeRpx(4);
+            padding: 0 pxChangeRpx(6);
+            margin-left: pxChangeRpx(16);
+            line-height: pxChangeRpx(34);
+            font-size: pxChangeRpx(24);
+            font-weight:bold;
+            color:rgba(255,125,0,1);
+            display: inline;
+            margin-bottom: pxChangeRpx(50);
+        }
+    }
+}

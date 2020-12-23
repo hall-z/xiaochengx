@@ -1,0 +1,46 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="modal-container" a:if="{{isShowModal}}">
+  <view class="modal-content {{modalInfo.status == 10 || modalInfo.status == 11 ? 'height1443' : ''}}">
+    <image class="modal-top" mode="widthFix" a:if="{{language == 'en_US'}}" src="{{modalInfo.status == 11 ? '/image/coupon-top-bg-en.png' : modalInfo.status == 10 ? '/image/sok-modal-tip-en.png' : '/image/sok-scan-login.png'}}"/>
+    <image class="modal-top" mode="widthFix" a:else src="{{modalInfo.status == 11 ? '/image/coupon-top-bg.png' : modalInfo.status == 10 ? '/image/sok-modal-tip.png' : '/image/sok-scan-login.png'}}"/>
+    <block a:if="{{modalInfo.status == 10 || modalInfo.status == 11}}">
+      <view class="center-content">
+        <view class="center-content-view">
+          <block a:for="{{modalInfo.alist}}" key="{{index}}">
+            <menu-list info="{{item}}" active="{{active}}" dindex="{{index}}" onSelect="onSelect" 
+              showType="{{modalInfo.status == 10 ? 1 : 2}}"
+              active1="{{active1}}" slanguage="{{slanguage}}"></menu-list>
+          </block>
+        </view>
+        <!-- <view class="no-tip" onTap="changeStatus" a:if="{{modalInfo.status == 10}}">
+          <image mode="scaleToFill" src="{{noStatus ? '/image/ico-selected.png' : '/image/icon-no-select.png'}}" />
+          <text>不再提醒</text>
+        </view> -->
+      </view>
+    </block>
+    <block a:else>
+      <!-- 图片和文字 -->
+      <image class="status-icon {{modalInfo.status == 5 ? 'status-icon1' : ''}}" mode="widthFix" 
+        src="{{modalInfo.imgUrl}}"/>
+      <view class="tips" a:for="{{modalInfo.msg}}">
+        {{item}}
+      </view>
+    </block>
+    <!-- {{!privacyStatus ? 'disabled' : ''}} disabled="{{!privacyStatus}}" -->
+    <view class="btn-container">
+      <button a:if="{{modalInfo.status == 10}}" class="confirm-btn never-notify" onTap="changeStatus">
+        {{langUtils.getSjsLanguage('no_thanks', langs, slanguage)}}
+      </button>
+      <button a:if="{{modalInfo.status == 10 || modalInfo.status == 11}}" class="confirm-btn " onTap="goCheck">
+        {{langUtils.getSjsLanguage(modalInfo.status == 10 ? 'sok_ready' : 'add_shopping_cart', langs, slanguage)}}
+      </button>
+    </view>
+    <image class="close-icon1" mode="scaleToFill" 
+    a:if="{{modalInfo.status == 1 || modalInfo.status == 4 || modalInfo.status == 5 || modalInfo.status == 10 || modalInfo.status == 11}}" src="/image/sok-close.png" onTap="closeModal"/>
+    <view class="btn-container" a:if="{{isShowBtn}}">
+      <view class="confirm-btn" onTap="closeModal">{{langUtils.getSjsLanguage('sok_order_limit_btn', langs, slanguage)}}</view>
+    </view>
+  </view>
+  
+  <view class="mask" catchtouchmove="catchtouchmove"></view> 
+</view>

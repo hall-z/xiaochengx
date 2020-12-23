@@ -1,0 +1,46 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<import-sjs name="utils" from="/mixins/utils.sjs"/>
+<view class="cmp-coupon-container ">
+		<view class="coupon">
+			<view class="coupon-info" >
+				<view class="fw-bold">
+					<text class="fs-80 lh-1em mr-10">{{couponInfo.discountType == 1 ? couponInfo.couponValue * 10 : couponInfo.couponValue}}</text>
+					<block a:if="{{couponInfo.discountType == 1}}">
+						{{langUtils.getSjsLanguage('off', langs, slanguage)}}
+					</block>
+					<block a:else>
+						{{langUtils.getSjsLanguage('price', langs, slanguage)}}
+					</block>
+				</view>
+				<view class="mt-16 lh-1em fw-bold coupon-name">{{slanguage == "zh_CN" ? couponInfo.couponName : couponInfo.couponNameEn}}</view>
+				<view class="mt-16 lh-1em fs-22" a:if="{{couponInfo.validityWay == 1}}">{{utils.getYearMonthDay(couponInfo.validityStartTime)}} {{langUtils.getSjsLanguage('to', langs, slanguage)}} {{utils.getYearMonthDay(couponInfo.validityEndTime)}}</view>
+				<!-- <view class="mt-16 lh-1em fs-22" v-else-if="couponInfo.validityWay == 2">领取后{{couponInfo.validityDays}}天内有效</view> -->
+				<view class="mt-16 lh-1em fs-22" a:elif="{{couponInfo.validityWay == 2}}">{{utils.getYearMonthDay(couponInfo.startTime)}} {{langUtils.getSjsLanguage('to', langs, slanguage)}} {{utils.getYearMonthDay(couponInfo.endTime)}}</view>
+				<view class="mt-18 lh-1em fs-22 description" a:if="{{couponInfo.minAmount > 0}}">
+					<block a:if="{{slanguage == 'zh_CN'}}">
+						<text>{{langUtils.getSjsLanguage('use_over1', langs, slanguage)}}{{couponInfo.minAmount}}{{langUtils.getSjsLanguage('use_over2', langs, slanguage)}}</text>
+					</block>
+					<block a:else>
+						<text>{{langUtils.getSjsLanguage('use_over', langs, slanguage)}}{{couponInfo.minAmount}}</text>
+					</block>
+				</view>
+				<view class="mt-18 lh-1em fs-22 description" a:else>
+					<!-- {{language == "zh_CN" ? couponInfo.description : couponInfo.descriptionEn}} -->
+					{{langUtils.getSjsLanguage('unlimited_coupons', langs, slanguage)}}
+				</view>
+			</view>
+			<image class="coupon-bg" src="{{couponDisabled ? '/image/coupon-disabled-bg.png' : '/image/coupon-bg.png'}}" mode="widthFix"></image>
+      
+			<block a:if="{{slanguage == 'zh_CN'}}">
+				<view class="coupon-btn " onTap="clickCopponBtn">
+          <text class="letter">{{couponBtn}}</text>
+					<!-- <text class="letter" a:for="{{couponBtn}}" a:key="{{index}}">{{item}}</text> -->
+				</view>
+			</block>
+			<block a:else>
+				<view class="coupon-btn" onTap="clickCopponBtn">
+					<text class="letter letter1 rotate-burden-90" >{{couponBtn}}</text>
+				</view>
+			</block>
+		</view>
+	</view>

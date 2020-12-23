@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "cmp-modal": "/components/modal/modal",
+        "mobile-login-modal": "/components/mobileLoginModal/mobileLoginModal"
+    }
+}

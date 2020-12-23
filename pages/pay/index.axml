@@ -1,0 +1,83 @@
+<!-- 首页 支付成功页面-->
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="container pay-container" onTap="openTimeOut">
+  <view class="top">
+    <image mode="scaleToFill" src="/image/logo-white1.png"/>
+  </view>
+  <view class="content {{pay_status == 2 || pay_status == 3 ? 'pl0' : ''}}">
+  <!-- {{langUtils.getSjsLanguage('order_total', langs, language)}} -->
+    
+    
+    <block a:if="{{pay_status == 2 || pay_status == 3}}">
+      <view class="pay-sucess-tip">
+        <!-- <image mode="scaleToFill" src="https://popeyes-prod.oss-cn-shanghai.aliyuncs.com/resource/sok/success.gif"/> -->
+        <image mode="scaleToFill" src="{{paySucessImg}}"/>
+      </view>
+    </block>
+    <block a:else>
+      <text class="t1">{{langUtils.getSjsLanguage('sok_paying', langs, language)}}</text>
+    </block>
+    <view class="box">
+      <block a:if="{{pay_status == 1}}">
+        <view class="suc-box">
+          <image mode="scaleToFill" src="/image/loading1.gif" class="pay-load"/>
+        </view>
+        
+      </block>
+      <block a:elif="{{pay_status == 2 || pay_status == 3}}">
+        <view class="bg">
+          <image mode="scaleToFill" src="/image/pay-success-bg.png" class="bg-img"/>
+          <view class="bg-info">
+            <!-- <text class="tt1">{{langUtils.getSjsLanguage('sok_take_receipt', langs, language)}}</text> -->
+            <block a:if="{{pay_status == 2}}">
+              <image mode="scaleToFill" src="/image/loading2.gif" class="suc-load"/>
+            </block>
+            <block a:else>
+              <text class="tt2">{{info.mealNo}}</text>
+              <text class="tt3 ">{{langUtils.getSjsLanguage('sok_pickup_number', langs, language)}}</text>
+            </block>
+          </view>
+        </view>
+        <view class="info">
+          <view class="i-list">
+            <view class="i-list-l">
+              {{langUtils.getSjsLanguage('order_no', langs, language)}}
+            </view>
+            <view class="i-list-r">
+              {{pay_status == 3 ? info.orderNo : ''}}
+            </view>
+          </view>
+          <view class="i-list">
+            <view class="i-list-l">
+              {{langUtils.getSjsLanguage('total', langs, language)}}
+            </view>
+            <view class="i-list-r">
+              <!-- {{pay_status == 3 ? info.orderAmount+'元' : ''}} -->
+              <block a:if="{{pay_status == 3}}">
+              <block a:if="{{language == 'en_US'}}">¥</block>{{info.productTotalPrice }}<block a:if="{{language == 'zh_CN'}}">元 </block> 
+              </block>
+            </view>
+          </view>
+          <view class="i-list">
+            <view class="i-list-l">
+              {{langUtils.getSjsLanguage('sok_actually_paid', langs, language)}}
+            </view>
+            <view class="i-list-r">
+              <!-- {{pay_status == 3 ? info.payPrice+'元' : ''}} -->
+              <block a:if="{{pay_status == 3}}">
+              <block a:if="{{language == 'en_US'}}">¥</block>{{info.payPrice }}<block a:if="{{language == 'zh_CN'}}">元 </block> 
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="bottom" a:if="{{pay_status != 1}}">
+    <view class="btn {{pay_status == 3 ? 'sub' : ''}}" onTap="goIndex">
+      {{langUtils.getSjsLanguage('sok_done', langs, language)}}
+    </view>
+  </view>
+  <!-- 状态modal框 -->
+  <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="goIndex" slanguage="{{language}}"/>
+</view>

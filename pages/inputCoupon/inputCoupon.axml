@@ -1,0 +1,21 @@
+<import-sjs name="langUtils" from="../../mixins/lang.sjs"/>
+<view class="container input-coupon-container"  onTouchStart="openTimeOut">
+    <!-- <image mode="scaleToFill" src="/image/style-bg.png" class="bg"/> -->
+    <block a:if="{{showPage == 1}}">
+      <text class="t1 t2">{{langUtils.getSjsLanguage('sok_scan_coupon', langs, language)}}</text>
+      <!-- <text class="t1 t2">{{langUtils.getSjsLanguage('sok_scan_coupon_tip1', langs, language)}}</text> -->
+      <image mode="scaleToFill" src="/image/sok-coupon-scan.png" class="t-img"/> 
+    </block>
+    <view class="bottom-view">
+      <image mode="scaleToFill" src="/image/sok-back.png" class="left" onTap="goBack"/>
+      <view class="right">
+        <!-- <block a:if="{{showPage == 1}}">
+          <view class="button {{language == 'en_US' ? 'normal': ''}}" onTap="goInput">
+            {{langUtils.getSjsLanguage('sok_scan_coupon_input', langs, language)}}
+          </view>
+        </block> -->
+      </view>
+    </view>
+    <!-- 状态modal框 -->
+    <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" slanguage="{{language}}"/>
+</view>

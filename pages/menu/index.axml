@@ -1,0 +1,103 @@
+
+<import-sjs name="langUtils" from="../../mixins/lang.sjs"/>
+<import-sjs name="utils" from="/mixins/utils.sjs"/>
+<view class="container " onTouchStart="openTimeOut">
+  <view class="back-to-home">
+    <image mode="scaleToFill" src="/image/logo-white.png"/>
+    <text class="back-to-home-btn" onTap="goToIndex">{{langUtils.getSjsLanguage('logout', langs, language)}}</text>
+  </view>
+  <view class="menu-container {{isFixed ? 'box-fixed' : ''}}">
+    <!-- == 顶部banner == -->
+    <view class="banner-box" id="all-tops">
+    <!-- {{langUtils.getSjsLanguage('cancel', langs, language)}} -->
+      <view class="banner">
+        <swiper class="swiper"
+          autoplay="{{config.autoplay}}" 
+          interval="{{config.interval}}" 
+          duration="{{config.duration}}"
+          current="{{config.current}}"
+          circular="{{config.circular}}"
+          onChange="changeSwiper">
+          <swiper-item class="swiper-item" a:for="{{bannerList}}" key="{{index}}"
+              onTap="onGoRouter" data-item="{{item}}">
+            <image src="{{item.imageUrl}}" mode="scaleToFill" class="b-img"></image>
+          </swiper-item>
+        </swiper>
+        <view class="dot">
+          <block a:for="{{bannerList}}" key="{{index}}">
+            <view class="dot-list {{config.current == index ? ' active' : ''}}" ></view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="discountsBox">
+      <notice className="discountsText">
+        优惠公告
+      </notice>
+      <view class="activity">
+        <tag size="lg"  ghost="{{true}}" type="danger">满减</tag>
+      </view>
+    </view> -->
+    <view class="content {{isFixed1 ? 'box-fixed' : ''}} {{cartInfo.number > 0 ? 'has-cart' : ''}}">
+				<view class="left {{isFixed ? 'box-fixed' : ''}} {{cartInfo.number > 0 ? 'has-cart' : ''}}">
+          <scroll-view 
+						class="left-content" scroll-y="{{true}}"  
+						throttle="{{false}}"
+						onScroll="onProductsScrollLeft"
+						scroll-top="{{leftScrollTop}}"
+						>
+            <block a:for="{{menuList}}">
+              <block a:if="{{item.id == 'coupon'}}">
+                <view class="left-list {{clickActive == index ? 'active' : ''}}" key="{{index}}"
+                a:if="{{productCoupons.length > 0}}"
+                  onTap="changeCategory" data-index="{{index}}" data-toView="{{ item.id }}">
+                  <image src="{{clickActive == index ? '/image/men-active-coupon.png' : '/image/new-default-coupon.png'}}" 
+                    mode="scaleToFill" class="left-icon" />
+                  <text class="left-name">{{langUtils.getSjsLanguage('sok_coupon_txt', langs, language)}} </text>
+                  <view class="left-line" a:if="{{clickActive == index}}"></view>
+                  <view class="left-num">{{utils.getCounponNum(productCoupons)}}</view>
+                </view>
+              </block>
+              <block a:else>
+                <view class="left-list {{clickActive == index ? 'active' : ''}}" key="{{index}}"
+                  onTap="changeCategory" data-index="{{index}}" data-toView="{{ item.id }}">
+                  <image src="{{clickActive == index ? item.chosenIcon : item.icon}}" mode="scaleToFill" class="left-icon" />
+                  <text class="left-name">{{language == 'zh_CN' ? item.className : item.classNameEn}}</text>
+                  <view class="left-line" a:if="{{clickActive == index}}"></view>
+                </view>
+              </block>
+            </block>
+          </scroll-view>
+				</view>
+				<view class="right" onTouchStart="rightChange">
+          <scroll-view 
+              class="right-box" scroll-y="{{true}}"  
+              throttle="{{false}}"
+              onScroll="onProductsScroll"
+              scroll-into-view="{{toView}}"
+              lower-threshold="{{2}}"
+              >
+            <block a:for='{{menuList}}' a:for-index="idx" a:for-item="firstItem" key="idx">
+              <view  id="target_{{firstItem.id}}">
+              <view class="right-box1">
+                <block a:for="{{firstItem.productList}}">
+                  <block a:if="{{firstItem.id === 'coupon'}}">
+                    <cmp-item type="1" item="{{item}}" onResetCart="resetCart1" onSelect="onSelect" onOpenTimeOut="openTimeOut" onDelCancel="onDelCancel" slanguage="{{language}}"></cmp-item>
+                  </block>
+                  <block a:else>
+                    <menu-list info="{{item}}"  key="{{index}}" onResetCart="resetCart" openTimeOut='openTimeOut' slanguage="{{language}}"></neo-menu-list>
+                  </block>
+                </block>
+              </view>
+              </view>
+            </block>
+          </view>
+          </scroll-view>
+			</view>
+  </view>
+  
+  <block a:if="{{cartInfo.number > 0}}" >
+    <menu-foot info="{{ cartInfo }}" openTimeOut='openTimeOut' slanguage="{{language}}"></menu-foot>
+  </block>
+  <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" onAdd="onAdd" slanguage="{{language}}"></cmp-modal>
+</view>

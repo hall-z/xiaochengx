@@ -1,0 +1,21 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="eat-style-container container" style="backgroundImage: url('{{styleBg}}')" onTap="openTimeOut">
+  <!-- <image class="logo" mode="widthFix" src="/image/logo.png"/> -->
+  <view class="btn-container">
+    <view class="eat-style-btn here-btn" onTap="selectStyle" data-index="{{1}}">
+      <image mode="widthFix" src="/image/icon-eat-here.png"/>
+      <view class="text {{language == 'en_US' ? 'normal': ''}}">
+        {{langUtils.getSjsLanguage('sok_dine_in', langs, language)}}
+      </view>
+    </view>
+    <view class="eat-style-btn outer-btn" onTap="selectStyle" data-index="{{2}}">
+      <image mode="widthFix" src="/image/icon-eat-outer.png"/>
+      <view class="text {{language == 'en_US' ? 'normal': ''}}">
+        {{langUtils.getSjsLanguage('sok_take_out', langs, language)}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 状态modal框 -->
+    <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" />
+</view>

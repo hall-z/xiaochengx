@@ -1,0 +1,79 @@
+@import "../../styles/common.scss";
+.menu-sub-list {
+    display: flex;
+    box-shadow: 0 pxChangeRpx(2) pxChangeRpx(6) rgba(152,152,152,0.57);
+    
+    $height: pxChangeRpx(300);
+    height: $height;
+    border-radius: pxChangeRpx(20);
+    background: #fff;
+    margin-bottom: pxChangeRpx(30);
+    .left{
+        width: pxChangeRpx(270);
+        /* height: pxChangeRpx(270); */
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        image{
+            width: pxChangeRpx(270);
+            height: pxChangeRpx(270);
+        }
+    }
+    .right{
+        flex: 1;
+        height: $height;
+        padding-left: pxChangeRpx(20);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .r1{
+            display: flex;
+             flex-direction: column;
+             padding-top: pxChangeRpx(24);
+             padding-right: pxChangeRpx(36);
+             .t1{
+                 font-size: pxChangeRpx(40);
+                 line-height: pxChangeRpx(56);
+                 font-weight: bold;
+                 margin-bottom: pxChangeRpx(20);
+                 color: #222222;
+                 overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                word-break: break-all;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2; 
+             }
+             .t2{
+                 font-weight: bold;
+                 font-size: pxChangeRpx(32);
+                 line-height: pxChangeRpx(45);
+                 color: #222222;
+                 text{
+                     font-size: pxChangeRpx(60);
+                 }
+                 .product-price {
+                     font-size: pxChangeRpx(26);
+                     margin-left: pxChangeRpx(10);
+                     color: #A3A7BC;
+                     text-decoration: line-through;
+                     text {
+                         font-size: pxChangeRpx(32);
+                     }
+                 }
+             }
+        }
+        .t3{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: pxChangeRpx(27);
+            padding-right: pxChangeRpx(36);
+            image{
+                width: pxChangeRpx(57);
+                height: pxChangeRpx(57);
+            }
+        }
+    }
+}

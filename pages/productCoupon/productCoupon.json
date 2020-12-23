@@ -1,0 +1,6 @@
+{
+     "usingComponents": {
+        "cmp-modal": "/components/modal/modal",
+        "cmp-item": "./item/index"
+    }
+}

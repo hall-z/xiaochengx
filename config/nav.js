@@ -1,0 +1,25 @@
+const navs = {
+	"pages/orderDetails/order/index": "store_orders",
+	"pages/orderDetails/tack-out/index": "delivery_orders",
+	"pages/memberCenter/orderHistory/index/index": "order_history",
+	"pages/address/chooseAddress/index": "choose_an_address",
+	"pages/address/chooseCity/index": "choose_city",
+	"pages/productDetails/index/index": "product_details",
+	"pages/shoppingCart/index/index": "shopping_cart",
+	"pages/store/storeList/index": "stores",
+	"pages/store/chooseCity/index": "choose_city",
+	"pages/memberCenter/index/index": "member_center",
+	"pages/memberCenter/myCoupon/index": "my_coupons",
+	"pages/memberCenter/couponDetails/index": "coupons_details",
+	"pages/memberCenter/pointsDetails/index": "point_detail",
+	"pages/activityDetails/index": "activity_details",
+	"pages/menu/order/index": "order_now",
+	"pages/menu/tack-out/index": "delivery",
+	"pages/searchProduct/index": "find_product",
+	"pages/balance/order/index": "order_confirm",
+	"pages/balance/tack-out/index": "order_confirm",
+	"pages/balance/super/index": "additional_purchase",
+	"pages/balance/couponList/index": "use_coupons",
+}
+
+export default navs;

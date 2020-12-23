@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "cmp-counter": "/components/counter/counter",
+        "cart-item": "./cartItem/cartItem",
+        "cmp-modal": "/components/modal/modal"
+    }
+}

@@ -1,0 +1,25 @@
+<template name="flyer_main_page">
+  <view wx:if="{{page.bg}}" style="font-size:0;padding:0;margin:0;">
+    <image binderror="onFlyerImageError" class="{{page.close?'campaign-hide':''}}" style="width:750rpx;" mode="widthFix" src="{{page.bg}}"></image>
+  </view>
+  <import src="../../templates/modal.wxml" />
+  <view class="{{page.close?'cam_hide':''}}">
+    <form bindsubmit="onFlyerFormSubmit" report-submit="true">
+      <template is="mbox_render_items" data="{{canIUse:page.canIUse, btns:page.btn}}"></template>
+    </form>
+  </view>
+  <template is="flyer_modal" data="{{canIUse:page.canIUse, modal_msg:page.modal_msg}}"></template>
+  <import src="../../templates/preload.wxml" />
+  <template is="flyer_preload" data="{{list:page.image_list}}"></template>
+</template>
+
+
+<block wx:if="{{flyer.campaign.h5}}">
+  <web-view wx:if="{{flyer.campaign.web_url}}" src="{{flyer.campaign.web_url}}" bindmessage="onFlyerWebMessage"></web-view>
+</block>
+<scroll-view wx:elif="{{flyer.campaign.scroll}}" class="campaign-scrollbox" scroll-y bindscroll="onFlyerPageScroll" scroll-top="{{scrollTop}}" lower-threshold="1">
+  <template is="flyer_main_page" data="{{page:flyer.campaign}}"></template>
+</scroll-view>
+<view wx:else class="campaign-container {{flyer.campaign.trim?'campaign-unscroll':''}}">
+  <template is="flyer_main_page" data="{{page:flyer.campaign}}"></template>
+</view>

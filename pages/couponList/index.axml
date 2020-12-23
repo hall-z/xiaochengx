@@ -1,0 +1,20 @@
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="coupon-list container" onTap="openTimeOut">
+		<view class="not-use-btn btn" onTap="clickCoppon" data-type="2">
+			{{langUtils.getSjsLanguage('no_coupon', langs, language)}}
+		</view>
+		<view class="use-staff-btn btn" a:if="{{userDiscount.couponValue}}" onTap="clickCoppon" data-type="3">
+			{{langUtils.getSjsLanguage('employee_discount', langs, language)}}
+		</view>
+		
+		<cmp-coupon coupon="{{item}}"
+			couponDisabled="{{false}}"
+			couponBtn="{{langUtils.getSjsLanguage('use', langs, language)}}"
+			isToDetails="{{false}}"
+      data-type="1"
+      data-index="{{index}}"
+      onCloseModal="clickCou"
+			slanguage="{{language}}"
+			a:for="{{couponList}}" a:key="{{index}}">
+		</cmp-coupon>
+	</view>

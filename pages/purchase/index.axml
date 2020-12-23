@@ -1,0 +1,30 @@
+<!-- 首页 选择超值搭配-->
+<import-sjs name="utils" from="../../mixins/utils.sjs"/>
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="container" onTap="openTimeOut">
+  <view class="content">
+    <view class="list" a:for="{{addList}}" key="{{index}}"
+      onTap="selectItem" data-item="{{item}}">
+      <view class="list-l">
+        <view class="img">
+           <image mode="scaleToFill" src="{{utils.getAddImg(item)}}"/>
+        </view>
+        <view class="txt">
+           {{language == "zh_CN" ? item.productName : item.productNameEn}}
+        </view>
+      </view>
+      <view class="list-r">
+        <!-- <text a:if="{{utils.getIsArr(item.productCode, superPro)}}">+ <block a:if="{{language == 'en_US'}}">¥</block>{{item.activityPrice}}<block a:if="{{language == 'zh_CN'}}">元 </block></text> -->
+        <text>+ <block a:if="{{language == 'en_US'}}">¥</block>{{item.activityPrice}}<block a:if="{{language == 'zh_CN'}}">元 </block></text>
+        <image mode="scaleToFill" src="{{utils.getIsArr(item.productCode, superPro) ? '/image/icon-success-min.png' : '/image/icon-no-select.png'}}"/>
+      </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <image mode="scaleToFill" src="/image/sok-back.png" class="b-l" onTap="goBack"/>
+    <view class="b-r {{language == 'en_US' ? 'normal': ''}}" onTap="goSub">
+      <!-- <image class="ico-check-success" src="/image/ico-check-A.png" mode="scaleToFill" /> -->
+      <text>{{langUtils.getSjsLanguage('ready', langs, language)}}</text>
+    </view>
+  </view>
+</view>

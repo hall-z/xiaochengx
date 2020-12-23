@@ -1,0 +1,89 @@
+@import "../../styles/common.scss";
+.pro-cou-container {
+    display: flex;
+    flex-direction: column;
+    .content{
+        padding: pxChangeRpx(76) pxChangeRpx(55) pxChangeRpx(210);
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        
+    }
+    .right-l{
+        position: relative;
+        display: flex;
+        align-items: center;
+        .cart-icon{
+            width: pxChangeRpx(132);
+            height: pxChangeRpx(132);
+        }
+        .tip-box{
+            width:pxChangeRpx(53);
+            height:pxChangeRpx(53);
+            border:pxChangeRpx(6) solid rgba(255,125,0,1);
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: pxChangeRpx(-18);
+            right: pxChangeRpx(-16);
+            font-size:pxChangeRpx(34);
+            font-weight:bold;
+            color:rgba(245,85,0,1);
+        }
+    }
+    .btn-view{
+        position: fixed;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: pxChangeRpx(210);
+        border-radius: pxChangeRpx(32) pxChangeRpx(32) 0 0;
+        border-top: pxChangeRpx(2) solid #F3F2F1;
+        .left{
+            width: pxChangeRpx(454);
+            height: pxChangeRpx(130);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FF7D00;
+            border-radius: 0 pxChangeRpx(100) pxChangeRpx(100) 0;
+            image{
+                width: pxChangeRpx(77);
+                height: pxChangeRpx(71);
+                margin-right: pxChangeRpx(38);
+            }
+            text{
+                font-size: pxChangeRpx(70);
+                color: #fff;
+                font-weight: bold;
+                letter-spacing: pxChangeRpx(16);
+            }
+        }
+        .cart-icon{
+            width: pxChangeRpx(132);
+            height: pxChangeRpx(132);
+        }
+        .right{
+            display: flex;
+            align-items: center;
+            padding-right: pxChangeRpx(38);
+            .total{
+                font-size: pxChangeRpx(36);
+                color: #222222;
+                font-weight: bold;
+                padding-right: pxChangeRpx(30);
+                text{
+                    font-size: pxChangeRpx(110);
+                }
+            }
+        }
+    }
+}

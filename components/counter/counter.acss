@@ -1,0 +1,1 @@
+@charset "UTF-8";.count-container{display:flex;align-items:center}.count-container .cum-icon,.count-container .cum-icon.cum-icon1{width:45.13889rpx;height:45.13889rpx}.count-container .mum{display:inline-block;width:100rpx;font-size:41.66667rpx;font-weight:700;text-align:center}.count-container .mum.mum1{font-size:41.66667rpx}

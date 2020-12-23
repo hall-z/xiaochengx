@@ -1,0 +1,58 @@
+/* vendor/nabi/_wechat/pages/campaign/jump.wxss */
+page {  
+  display: block;  
+  min-height: 100%;  
+  background-color: #404040;  
+}
+
+.container {
+  font-size: 0;
+}
+
+.container .content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 500rpx;
+  padding: 50rpx 50rpx 50rpx;
+  /* border: 2rpx solid #e80974; */
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  border-radius: 10rpx;
+}
+
+.container .text {
+  color: #ddd;
+  letter-spacing: 2rpx;
+}
+
+
+.btn-container {
+  margin-top: 60rpx;
+}
+
+.btn-container .btn {
+  display: inline-block;
+  padding: 10rpx 0;
+  width: 160rpx;
+  margin: 0 40rpx;
+  color: #666;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-btn {
+  border: 2rpx solid #666;
+  border-radius: 8rpx;
+}
+
+.confirm-btn {
+  background-color: #fff;
+  border: 2rpx solid #fff;
+  border-radius: 8rpx;
+}
+

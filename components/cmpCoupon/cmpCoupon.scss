@@ -1,0 +1,92 @@
+.rotate-burden-90{
+	-moz-transform:rotate(-90deg);
+	-webkit-transform:rotate(-90deg);
+	-o-transform:rotate(-90deg);
+	-ms-transform:rotate(-90deg);
+	transform:rotate(-90deg);
+}
+@import "../../styles/common.scss";
+/* $container: "cmp-coupon-container"; */
+.cmp-coupon-container {
+    
+    /* fs-80 lh-1em mr-10 "mt-16 lh-1em fs-22 mt-18 */
+	/* &.container { */
+        .fw-bold{
+            font-weight: bold;
+        }
+        .fs-80{
+            font-size: pxChangeRpx(80);
+        }
+        .fs-22{
+            font-size: pxChangeRpx(36);
+        }
+        .lh-1em{
+            line-height: 1;
+        }
+        .mr-10{
+            margin-right: pxChangeRpx(30);
+        }
+        .mt-16{
+            margin-top: pxChangeRpx(42);
+        }
+        .mt-18{
+            margin-top: pxChangeRpx(48);
+        }
+		.coupon {
+			position: relative;
+			width: pxChangeRpx(920);
+			height: pxChangeRpx(412);
+			margin: pxChangeRpx(80) auto 0;
+			.coupon-bg {
+				width: pxChangeRpx(920);
+			    height: pxChangeRpx(412);
+			}
+			.coupon-info {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: pxChangeRpx(680);
+				height: pxChangeRpx(350);
+				padding: pxChangeRpx(48) pxChangeRpx(10) 0 pxChangeRpx(30);
+				font-size: pxChangeRpx(36);
+				color: #fff;
+			}
+			.coupon-name,.description {
+				text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+			}
+			.coupon-btn {
+				position: absolute;
+				right: 0;
+				top: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+                align-items: center;
+				width: pxChangeRpx(200);
+				height: pxChangeRpx(412);
+				font-size: pxChangeRpx(50);
+				color: #fff;
+				border-radius: pxChangeRpx(20);
+				.letter {
+					display: inline-block;
+					/* width: pxChangeRpx(200); */
+					line-height: pxChangeRpx(100);
+                    width: pxChangeRpx(50);
+					text-align: center;
+				}
+				.letter1 {
+					// display: inline-block;
+					// width: 145rpx;
+					// line-height: 58rpx;
+					text-align: center;
+					width: pxChangeRpx(412); 
+					position: absolute;
+					left: 50%;
+					margin-left: pxChangeRpx(-206);
+				}
+			}
+		}
+	/* } */
+}

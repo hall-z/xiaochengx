@@ -1,0 +1,34 @@
+<import-sjs name="utils" from="/mixins/utils.sjs"/>
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="menu-sub-list" onTap="selectInfo">
+  <view class="left">
+  <!-- {{info.productImage}} -->
+    <image mode="scaleToFill" src="{{showType == 1 ? utils.getAddImg(info) : utils.getProImg(info)}}" />
+  </view>
+  <view class="right">
+    <view class="r1">
+      <block a:if="{{showType == 1}}">
+      <text class="t1">{{slanguage == 'zh_CN' ? info.productName : info.productNameEn}}</text>
+      </block>
+      <block a:else>
+      <text class="t1">{{slanguage == 'zh_CN' ? info.name : info.nameEn}}</text>
+      </block>
+      <view class="t2">
+        ¥<text>{{showType == 1 ? info.activityPrice : info.productCouponValue}}</text>
+        <!-- 原价 -->
+        <text class="product-price" a:if="{{showType == 1 && (info.activityPrice < info.productPrice)}}">
+          ￥<text>{{info.productPrice}}</text>
+        </text>
+      </view>
+    </view>
+    
+    <view class="t3">
+      <block a:if='{{showType == 1}}'>
+        <image mode="scaleToFill" src="{{utils.getIsArrN(dindex, active) ? '/image/ico-selected.png' : '/image/icon-no-select.png'}}" />
+      </block>
+      <block a:else>
+      <image mode="scaleToFill" src="{{active1 == dindex ? '/image/ico-selected.png' : '/image/icon-no-select.png'}}" />
+      </block>
+    </view>
+  </view>
+</view>

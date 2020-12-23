@@ -1,0 +1,37 @@
+@import "../../styles/common.scss";
+.privacy-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #F9F8F7;
+     height: calc(100vh);
+     overflow: hidden;
+    .top{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: pxChangeRpx(200);
+        image{
+            width: pxChangeRpx(393);
+            height: pxChangeRpx(63);
+        }
+        margin-bottom: pxChangeRpx(40);
+        background: $themeColor;
+    }
+    .content{
+        width: pxChangeRpx(980);
+        /* height: pxChangeRpx(1451); */
+        height: calc(100vh - 322.22rpx);
+        border: pxChangeRpx(2) solid #979797;
+        border-radius: pxChangeRpx(32);
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background: #fff;
+        margin-bottom: pxChangeRpx(60);
+        image{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

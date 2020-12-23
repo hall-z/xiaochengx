@@ -1,0 +1,30 @@
+@import "../../styles/common.scss";
+.coupon-list {
+	min-height: 100vh;
+	background-color: #fff;
+	&.container {
+		.btn {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: pxChangeRpx(930);
+			height: pxChangeRpx(120);
+			font-weight: bold;
+			font-size: pxChangeRpx(36);
+			margin: 0 auto;
+			border-radius: pxChangeRpx(24);
+			&.not-use-btn {
+				color: #FF7D00;
+				border: pxChangeRpx(2) solid #FF7D00;
+				background-color: #fff;
+				margin: pxChangeRpx(20) auto 0;
+			}
+			&.use-staff-btn {
+				color: #fff;
+				margin-top: pxChangeRpx(40);
+				border: pxChangeRpx(2) solid #FF7D00;
+				background-color: #FF7D00;
+			}
+		}
+	}
+}

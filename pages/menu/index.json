@@ -1,0 +1,13 @@
+{
+    "usingComponents": {
+        "menu-list":"/components/menu/item",
+        "menu-foot":"/components/menu/footer",
+        "cmp-modal": "/components/modal/modal",
+        "cmp-item": "../productCoupon/item/index",
+        "notice": "mini-ali-ui/es/notice/index",
+        "tag": "mini-ali-ui/es/tag/index",
+        "list-item": "mini-ali-ui/es/list/list-item/index",
+        "am-switch": "mini-ali-ui/es/am-switch/index"
+    },
+    "disableScroll": true
+}

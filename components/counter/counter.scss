@@ -1,0 +1,23 @@
+@import "../../styles/common.scss";
+.count-container {
+    display: flex;
+    align-items: center;
+    .cum-icon {
+        width: pxChangeRpx(65);
+        height: pxChangeRpx(65);
+        &.cum-icon1{
+            width: pxChangeRpx(65);
+            height: pxChangeRpx(65);
+        }
+    }
+    .mum {
+        display: inline-block;
+        width: pxChangeRpx(144);
+        font-size: pxChangeRpx(60);
+        font-weight: bold;
+        text-align: center;
+        &.mum1{
+            font-size: pxChangeRpx(60);
+        }
+    }
+}

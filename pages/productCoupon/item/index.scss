@@ -1,0 +1,176 @@
+@import "../../../styles/common.scss";
+.pro-cou-list{
+    width: pxChangeRpx(969);
+    height: pxChangeRpx(441);
+    margin-bottom: pxChangeRpx(40);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    .bg{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .info{
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding-left: pxChangeRpx(28);
+        .p-img{
+            width: pxChangeRpx(200);
+            height: pxChangeRpx(200);
+        }
+        .info-b{
+            width: pxChangeRpx(490);
+            padding-left: pxChangeRpx(28);
+            display: flex;
+            flex-direction: column;
+            .t1{
+                font-size: pxChangeRpx(44);
+                font-weight:bold;
+                line-height: pxChangeRpx(62);
+                color:#222222;
+                margin-bottom: pxChangeRpx(20);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                word-break: break-all;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2; 
+            }
+            .t2{
+                line-height: pxChangeRpx(45);
+                color: #A6A6A6;
+                font-size: pxChangeRpx(32);
+                font-weight: bold;
+                margin-bottom: pxChangeRpx(10);
+            }
+        }
+    }
+    .coupon-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: pxChangeRpx(154);
+        height: pxChangeRpx(441);
+        font-size: pxChangeRpx(50);
+        color: #FF7D00;
+        border-radius: pxChangeRpx(20);
+        font-weight: 500;
+        align-items: center;
+        .letter {
+            display: inline-block;
+            width: pxChangeRpx(50);
+            line-height: pxChangeRpx(60);
+            text-align: center;
+        }
+        .letter1 {
+            text-align: center;
+            width: pxChangeRpx(441);
+            position: absolute;
+            left: 50%;
+            margin-left: pxChangeRpx(-220);
+        }
+    }
+}
+.n-pro-cou-list{
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: pxChangeRpx(20);
+    .menu-list{
+        padding: pxChangeRpx(7) pxChangeRpx(10) 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .menu-list1{
+        height: pxChangeRpx(508);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        .bg{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .tag{
+            width: pxChangeRpx(73);
+            height: pxChangeRpx(73);
+            position: absolute;
+            top: pxChangeRpx(-7);
+            left: pxChangeRpx(-7);
+            z-index: 2;
+        }
+        .p-img{
+            width: pxChangeRpx(228);
+            height: pxChangeRpx(228);
+        }
+        .info{
+            position: relative;
+            z-index: 1;
+            direction: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 pxChangeRpx(15);
+        }
+        .t1{
+            font-size: pxChangeRpx(30);
+            color: #43090F;
+            line-height: pxChangeRpx(46);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            word-break: break-all;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2; 
+            height: pxChangeRpx(92);
+            margin: pxChangeRpx(5) 0;
+        }
+        .info-b{
+            display: flex;
+            flex-direction: column;
+            font-size: pxChangeRpx(20);
+            color: #AFAFAF;
+            line-height: pxChangeRpx(28);
+        }
+        .coupon-btn{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: pxChangeRpx(80);
+            font-size: pxChangeRpx(34);
+            font-weight: bold;
+            color: #FA8821;
+        }
+    }
+    /*抛物线动画*/
+    .good_box{
+        width: pxChangeRpx(82);
+        height: pxChangeRpx(82);
+        position: fixed;
+        border-radius: 50%;
+        overflow: hidden;
+        left: 50%;
+        top: 50%;
+        z-index: +99;
+        /* background:rgba(0,133,207,1); */
+        image{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

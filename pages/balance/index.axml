@@ -1,0 +1,246 @@
+
+
+<import-sjs name="utils" from="../../mixins/utils.sjs"/>
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="container bg" onTap="openTimeOut">
+  <view class="content">
+    <view class="box">
+      <view class="pro-list" a:for="{{cartInfo.list}}" a:key="{{index}}">
+        <block a:if="{{item.discountMyType != 2}}">
+        <!-- == 普通商品 == -->
+          <view class="pro-top">
+            <view class="pro-list-l">
+              <view class="title-v" a:if="{{item.discountMyType == 1}}">{{langUtils.getSjsLanguage('coupon_tip', langs, language)}}</view>
+              <text class="t1">{{language == "zh_CN" ? item.name : item.nameEn}}</text>
+            </view>
+            <view class="pro-list-r">
+              <text class="r1">x{{item.cart_number}}</text>
+              <view class="r2" a:if="{{item.discountMyType != 1}}">
+                ¥<text a:if="{{userInfo.id}}">{{item.membershipPrice/100}}</text>
+                <text a:else>{{item.salesPrice/100}}</text>
+              </view>
+              <view class="r2" a:else>
+                ¥<text >{{item.discountMyPrice}}</text>
+              </view>
+            </view>
+          </view>
+          <text class="t2" >{{item.productType != 1 ? item.desSub : ''}}</text>
+         </block>
+         <block a:else>
+         <!-- == 商品加购 == -->
+          <view class="pro-top">
+            <view class="pro-list-l">
+              <text class="t1">{{language == "zh_CN" ? item.productName : item.productNameEn}}</text>
+            </view>
+            <view class="pro-list-r">
+              <text class="r1">x{{item.cart_number}}</text>
+              <view class="r2">
+                ¥<text>{{item.activityPrice}}</text>
+              </view>
+            </view>
+          </view>
+         <text class="t2" >{{langUtils.getSjsLanguage('bargain_purchase', langs, language)}}</text>
+         </block>
+      </view>
+      <block a:if="{{form.superPro.length > 0}}">
+      <view class="pro-list" a:for="{{form.superPro}}" a:key="{{index}}">
+        <view class="pro-top">
+          <view class="pro-list-l">
+            <text class="t1">{{language == "zh_CN" ? item.productName : item.productNameEn}}</text>
+          </view>
+          <view class="pro-list-r">
+            <text class="r1">x1</text>
+            <view class="r2">
+              ¥<text>{{item.activityPrice}}</text>
+            </view>
+          </view>
+        </view>
+         <text class="t2" >{{langUtils.getSjsLanguage('bargain_purchase', langs, language)}}</text>
+      </view>
+      </block>
+    </view>
+    
+    <view class="box" a:if="{{addList.length > 0}}">
+      
+      <view class="tip">
+        <view class="tip-l">
+          <text>{{langUtils.getSjsLanguage('bargain_purchase', langs, language)}}</text>{{langUtils.getSjsLanguage('more_food', langs, language)}}
+        </view>
+        <view class="tip-r" onTap="goAdd">
+          {{langUtils.getSjsLanguage('all', langs, language)}}<image mode="scaleToFill" src="/image/icon-right.png"/>
+        </view>
+      </view>
+      <view class="super-content">
+				<view class="super-b">
+					<view class="super-bc" >
+						<block a:for="{{addList}}" >
+							<view class="swiper-item {{utils.getIsArr(item.productCode, form.superPro) ? 'active-class' : ''}}" key="{{index}}"
+								onTap="changeSuper" data-item="{{item}}">
+								<view class="product-info-container">
+									<view class="extra-price bg lh-1em" a:if="{{utils.getIsArr(item.productCode, form.superPro)}}">
+										{{langUtils.getSjsLanguage('add', langs, language)}}￥
+										<text class="num">{{item.activityPrice}}</text>
+									</view>
+									<image class="product-img" src="{{utils.getAddImg(item)}}" mode="scaleToFill"></image>
+									<image class="ico-selected" src="/image/icon-success-min.png" mode="scaleToFill" a:if="{{utils.getIsArr(item.productCode, form.superPro)}}"></image>
+								</view>
+								<view class="product-name fw-bold">{{language == "zh_CN" ? item.productName : item.productNameEn}}</view>
+							</view>
+						</block>
+					</view>
+				</view>
+			</view>
+    </view>
+    <view class="box" >
+      <view class="scan-card {{scanCoupons.length > 0 ? 'pb20' : ''}}">
+        <view class="tip"  onTap="goGetCoupon">
+          <view class="tip-l">
+            <text>{{langUtils.getSjsLanguage('sok_scan_coupon', langs, language)}}</text>
+          </view>
+          <view class="tip-r" >
+            <image mode="scaleToFill" src="/image/icon-right.png"/>
+          </view>
+        </view>
+        <view class="coupon-content" a:if="{{scanCoupons.length > 0}}">
+          <block a:for="{{scanCoupons}}">
+            <view class="coupon-lc" key="{{index}}">
+              <view class="coupon-list {{utils.getIsArr(item.couponCode, form.scanCoupon, 'couponCode') ? ' active' : ''}}"
+                onTap="selectScanCoupon" data-item="{{item}}">
+                <view class="coupon-list-l">
+                  {{language == "zh_CN" ? item.couponName : item.couponNameEn}}
+                </view>
+                <view class="coupon-list-r">
+                  <image src="{{utils.getIsArr(item.couponCode, form.scanCoupon, 'couponCode') ? '/image/icon-success-min.png' : '/image/icon-no-select.png'}}" mode="scaleToFill"></image>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <image mode="scaleToFill" src="/image/dot-line.png" class="dot-line" a:if="{{coupons.length > 0 || userCoupon.couponValue}}"/>
+      </view>
+      <block a:if="{{coupons.length > 0 || userCoupon.couponValue}}">
+        <view class="tip">
+          <view class="tip-l">
+            <text>{{langUtils.getSjsLanguage('available_coupons', langs, language)}}</text>
+          </view>
+        </view>
+        <view class="coupon-content">
+          <block a:if="{{userCoupon.couponValue}}">
+            <view class="coupon-lc" >
+              <view class="coupon-list {{userDiscount.couponValue ? ' active' : ''}}"
+                onTap="selectCoupon" data-item="{{userCoupon}}" data-type="1">
+                <view class="coupon-list-l">
+                  {{language == "zh_CN" ? userCoupon.couponName : userCoupon.couponNameEn}}
+                </view>
+                <view class="coupon-list-r">
+                  <image src="{{userDiscount.couponValue ? '/image/icon-success-min.png' : '/image/icon-no-select.png'}}" mode="scaleToFill"></image>
+                </view>
+              </view>
+          </view>
+          </block>
+          <block a:for="{{coupons}}">
+            <view class="coupon-lc" key="{{index}}">
+              <view class="coupon-list {{form.coupons.id == item.id ? ' active' : ''}}"
+                onTap="selectCoupon" data-item="{{item}}"  data-type="2">
+                <view class="coupon-list-l">
+                  {{language == "zh_CN" ? item.couponTypeInfo.couponName : item.couponTypeInfo.couponNameEn}}
+                </view>
+                <view class="coupon-list-r">
+                  <image src="{{form.coupons.id == item.id ? '/image/icon-success-min.png' : '/image/icon-no-select.png'}}" mode="scaleToFill"></image>
+                </view>
+              </view>
+          </view>
+          </block>
+        </view>
+        <view class="bot-line" a:if="{{form.discountsPoints > 0}}">
+          <view></view>
+        </view>
+      </block>
+      <view class="tip {{isPoint ? '' : 'tip-po'}}" a:if="{{!noShowCoupons && form.discountsPoints > 0}}">
+        <view class="tip-l">
+          <text>{{langUtils.getSjsLanguage('points_deduction', langs, language)}}</text>
+					1000{{langUtils.getSjsLanguage('point_can_deduction', langs, language)}}1{{language == "zh_CN" ? '元' : ''}}
+        </view>
+        <view class="tip-r">
+          <text a:if="{{isPoint}}">{{langUtils.getSjsLanguage('use', langs, language)}}</text>
+					<text a:else>{{langUtils.getSjsLanguage('no_use', langs, language)}}</text>
+					<view class="switch {{isPoint ? 'active' : ''}}" onTap="changePoint">
+						<view class="switch-active"></view>
+					</view>
+        </view>
+      </view>
+      <block a:if="{{isPoint && form.discountsPoints > 0}}">
+				<view class="point-content">
+					<view class="point-l">
+						{{langUtils.getSjsLanguage('available_points', langs, language)}} {{maxPoint.points}}
+					</view>
+					<view class="point-r">
+						<view class="p-input">
+							<input class="input" placeholder-style="color: rgba(166,166,166,0.9)"
+								value="{{form.discountsPoints}}"
+								onInput="changeInputPoint"
+								onBlur="changeInputPoint"
+								type="number"
+                :placeholder="{{langUtils.getSjsLanguage('Input', langs, language)}}">
+						</view>
+					</view>
+				</view>
+        <view class="point-content point-content1">
+					<view class="point-l">
+						{{langUtils.getSjsLanguage('deducted', langs, language)}}
+					</view>
+					<view class="point-r">
+              {{(form.discountsPoints*maxPoint.rate).toFixed(2)}}
+					</view>
+				</view>
+			</block>
+    </view>
+    
+  </view>
+  <!-- 底部选好了的按钮 -->
+  <view class="total-footer">
+    <view class="total-top">
+      <view class="total-l">{{langUtils.getSjsLanguage('order_total', langs, language)}} 
+        <view class="l1"> {{form.superPro.length > 0 ? cartInfo.number + form.superPro.length : cartInfo.number}} </view> {{langUtils.getSjsLanguage('order_products', langs, language)}}</view>
+      <view class="total-r">
+        <view class="r1">{{langUtils.getSjsLanguage('total', langs, language)}}</view>
+        <view class="r2">￥</view>
+        <view class="r3">{{total}}</view>
+      </view>
+    </view>
+    <view class="select-btn-view">
+      <image mode="scaleToFill" src="/image/sok-back.png" class="left-l" onTap="goBack"/>
+      <view class="select-btn bg {{language == 'en_US' ? 'normal': ''}}" onTap="goPay">
+        <!-- <image class="ico-check-success" src="/image/ico-check-A.png" mode="scaleToFill" /> -->
+        {{langUtils.getSjsLanguage('pay', langs, language)}}
+      </view>
+    </view>
+    
+  </view>
+  <!-- 选择支付方式 -->
+  <view class="dialog" a:if="{{showPay}}">
+    <view class="dialog-content">
+      <text class="tit">{{langUtils.getSjsLanguage('sok_select_payment', langs, language)}}</text>
+      <image mode="scaleToFill" src="/image/sok-gray-close.png" class="dialog-close" onTap="close"/>
+      <!-- <view class="dialog-list" onTap="selectPay" data-type="1">
+        <image mode="scaleToFill" src="/image/alipay.png"/>
+        <text>{{langUtils.getSjsLanguage('sok_alipay', langs, language)}}</text>
+      </view> -->
+      <view class="dialog-list" onTap="selectPay" data-type="2">
+        <!-- <image mode="scaleToFill" src="/image/pay-scan-icon.png"/> -->
+        <view class="image_container">
+          <image mode="scaleToFill" src="/image/ico_alipay.png"/>
+          <image mode="scaleToFill" src="/image/ico_wechat.png"/>
+        </view>
+        <text>{{langUtils.getSjsLanguage('sok_scan_pay', langs, language)}}</text>
+      </view>
+      <view class="dialog-list" onTap="selectPay" data-type="3">
+        <image mode="scaleToFill" src="/image/face-pay.png"/>
+        <text>{{langUtils.getSjsLanguage('sok_alipay_face', langs, language)}}</text>
+      </view>
+    </view>
+    <view class="mask" ></view>
+  </view>
+  <!-- 状态modal框 -->
+  <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" onCloseModal="onCloseModal" slanguage="{{language}}"/>
+</view>

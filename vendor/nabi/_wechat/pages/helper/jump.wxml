@@ -1,0 +1,14 @@
+<!--vendor/nabi/_wechat/pages/campaign/jump.wxml-->
+<view class='container' wx:if="{{jumpFailed == 1}}">
+  <view class='content'>
+
+    <view class='text'>即将离开此小程序，</view>
+    <view class='text'>跳转到“{{appid}}”？</view>
+
+    <view class='btn-container'>
+      <view class='btn cancel-btn' bindtap='onCancel'>取消</view>
+      <navigator class='btn confirm-btn' target="miniProgram" open-type="navigate" app-id="{{appid}}" path="{{path}}" extra-data="" version="trial" >确定</navigator>
+    </view>
+
+  </view>
+</view>

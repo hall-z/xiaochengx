@@ -1,0 +1,46 @@
+<!-- 购物车页面 -->
+<import-sjs name="langUtils" from="/mixins/lang.sjs"/>
+<view class="shopping-cart-container" onTap="openTimeOut">
+  <!-- 顶部操作栏 -->
+  <view class="top-container">
+    <view>
+      <block a:if="{{language == 'en_US'}}">
+        {{cartInfo.number}}{{langUtils.getSjsLanguage('sok_items_added', langs, language)}}
+      </block>
+      <block a:elif="{{language == 'zh_CN'}}">
+      {{langUtils.getSjsLanguage('sok_items_added', langs, language)}} {{cartInfo.number}} {{langUtils.getSjsLanguage('sok_items_added1', langs, language)}}
+      </block>
+    </view>
+    <view class="right" onTap="clearCart">
+      <image class="ico-delete" mode="widthFix" src="/image/sok-delete.png"/>
+        {{langUtils.getSjsLanguage('clear_cart', langs, language)}}
+    </view>
+  </view>
+
+  <view class="content">
+    <block a:for="{{cartInfo.list}}">
+      <cart-item info="{{item}}" onResetCart="resetCart"  key="{{item.nid}}"  onResetItem="resetItem" onOpenTimeOut="openTimeOut"  slanguage="{{language}}"></cart-item>
+    </block>
+  </view>
+  <view class="footer-container">
+    <view class="cart-info">
+        
+				<view class="left">
+          <image mode="scaleToFill" src="/image/sok-back.png" class="left-l" onTap="goBack"/>
+          <view class="left-p">
+						{{langUtils.getSjsLanguage('total', langs, language)}} ¥<text>{{userInfo.id ? cartInfo.mtotal : cartInfo.total}}</text>
+					</view>
+				</view>
+				<view class="right">
+          
+					<button type="primary" onTap="goBalance" class="{{language == 'en_US' ? 'normal': ''}}">
+						<image src="/image/total-ji.png" mode="scaleToFill" class="right-icon"></image>
+						{{langUtils.getSjsLanguage('done', langs, language)}}
+					</button>
+				</view>
+			</view>
+  </view>
+
+  <!-- 状态modal框 -->
+  <cmp-modal isShowModal="{{isShowModal}}" modalInfo="{{modalInfo}}" isShowBtn="{{true}}" slanguage="{{language}}" onCloseModal="onCloseModal"/>
+</view>
