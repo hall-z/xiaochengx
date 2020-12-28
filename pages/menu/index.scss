@@ -103,7 +103,10 @@
 }
 .discountsBox {
   .discountsText {
-    color: #000;
+    .am-notice-marquee {
+      color: #000;
+    }
+    
   }
 }
 .content{

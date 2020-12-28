@@ -1,10 +1,9 @@
 {
   "pages": [
-    "pages/eatStyle/eatStyle",
-
-    "pages/menu/index",
-
     "pages/index/index",
+
+    "pages/eatStyle/eatStyle",
+    "pages/menu/index",
     "pages/productDetails/setMeal/setMeal",
     "pages/productDetails/single/single",
     "pages/shoppingCart/shoppingCart",

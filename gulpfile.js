@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     watch = require("gulp-watch"),
     sass = require('gulp-sass'),//获取gulp-sass模块
     livereload = require('gulp-livereload');//获取gulp-livereload模块（实现浏览器自动刷新）
-    
+
 var folders = ['./pages'];
 
 // 给gulp设置任务，编译sass
@@ -29,11 +29,11 @@ gulp.task('sass',function(done){
     // return merge(tasks);
 	return gulp.src(['./**/**/*.scss','!./node_modules/**/*.scss'])
   // return gulp.src('./src/sass/**/*.scss')
-  
+
   	 // ** 匹配路径中的0个或多个目录及其子目录,需要单独出现，即它左右不能有其他东西了
      	//使用数组的方式来匹配多种文件 gulp.src(['js/*.js','css/*.css','*.html'])
        	// * 匹配文件路径中的0个或多个字符
-         	
+
            	 // **/*.js 能匹配 foo.js,a/foo.js,a/b/foo.js,a/b/c/foo.js
               	// 通过pipe管道，使用 sass (此处的sass是上面使用 var声明的 sass )来读取/src
 
@@ -43,17 +43,17 @@ gulp.task('sass',function(done){
    	//使用数组的方式来匹配多种文件即它左右不能有其他东西了
 	//使用数组的方式来匹配多种文件 gulp.src(['js/*.js','css/*.css','*.html'])
 	// * 匹配文件路径中的0个或多个字符
-	
+
 	 // **/*.js 能匹配 foo.js,a/foo.js,a/b/foo.js,a/b/c/foo.js
 	// 通过pipe管道，使用 sass (此处的sass是上面使用 var声明的 sass )来读取/src/**/*.scss文件
-    
+
 	.pipe(sass())
     .pipe(rename({
         extname: ".acss"}))// 重命名后缀
     .pipe(csso()) // 压缩
 	//编译后文件输出的目录
     .pipe(gulp.dest('./'))// 输出
-    
+
 	 // 使用livereload 方法实现浏览器自动刷新
     .pipe(livereload());
 
@@ -73,4 +73,70 @@ gulp.task('watch', function() {
 // 在命令行使用 gulp 启动 sass 任务和 auto 任务
 gulp.task('default', gulp.series('sass', function() {
   // Do something after a, b, and c are finished.
+   // 遍历所有需要打包的SCSS/CSS文件路径
+    watch(['./**/*.scss','!./node_modules/**/*.scss'], gulp.series('sass', function() {
+        // Do something after a, b, and c are finished.
+    }));
 }))
+
+
+
+// // gulp.task('default', gulp.series(function() {
+// //  watcher('./pages/**/*.scss', function(){
+// //    miniSass();
+// //  });
+// // }));
+// // //手动编译
+// // gulp.task('sass', function(){
+// //  miniSass();
+// // });
+// // function miniSass(){
+// //  return gulp.src('./pages/**/*.scss')//需要编译的文件
+// //    .pipe(sass({
+// //      outputStyle: 'expanded'//展开输出方式 expanded 
+// //     }))
+// //     .pipe(rename((path)=> {
+// //      path.extname = '.wxss'
+// //    }))
+// //    .pipe(changed('./pages'))//只编译改动的文件
+// //    .pipe(gulp.dest('./pages'))//编译
+// //    .pipe(rename((path)=> {
+// //      console.log('编译完成文件：' + 'pages\\' + path.dirname + '\\' + >path.basename + '.scss')
+// //    }))
+// // }
+
+
+// var gulp = require('gulp');
+// var sass = require('gulp-sass');
+// var rename = require('gulp-rename')
+// var changed = require('gulp-changed')
+// var watcher = require('gulp-watch')
+
+// //自动监听
+// gulp.task('default', gulp.series(function() {
+//   watcher('./pages/**/*.scss', function(){
+//     miniSass();
+//   });
+// }));
+
+
+// //手动编译
+// gulp.task('sass', function(){
+//   miniSass();
+// });
+
+
+// function miniSass(){
+//   return gulp.src('./pages/**/*.scss')//需要编译的文件
+//     .pipe(sass({
+//       outputStyle: 'expanded'//展开输出方式 expanded 
+//      }))
+//      .pipe(rename((path)=> {
+//       path.extname = '.acss'
+//     }))
+//     .pipe(changed('./pages'))//只编译改动的文件
+//     .pipe(gulp.dest('./pages'))//编译
+//     .pipe(rename((path)=> {
+//       console.log('编译完成文件：' + 'pages\\' + path.dirname + '\\' + path.basename + '.scss')
+//     }))
+// }

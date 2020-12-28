@@ -30,6 +30,7 @@
         </view>
       </view>
     </view>
+    <!-- 优惠公告栏 -->
     <!-- <view class="discountsBox">
       <notice className="discountsText">
         优惠公告
